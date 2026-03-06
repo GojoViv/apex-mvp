@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX — MVP Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; min-height: 100vh; }
+
+/* ── LAYOUT ── */
+.layout { display: flex; min-height: 100vh; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 240px; background: #0d1117; border-right: 1px solid rgba(255,255,255,0.06);
+  padding: 28px 0; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; flex-shrink: 0;
+}
+.sidebar-logo { padding: 0 24px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 16px; }
+.sidebar-logo .wordmark { font-size: 22px; font-weight: 900; letter-spacing: 0.15em; background: linear-gradient(135deg, #FFD166, #FF9F1C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.sidebar-logo .sub { font-size: 9px; color: #4b5563; letter-spacing: 0.1em; margin-top: 2px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 11px 24px; cursor: pointer; font-size: 13px; font-weight: 500; color: #6b7280; transition: all 0.15s; border-left: 3px solid transparent; }
+.nav-item:hover { color: #e8eaf0; background: rgba(255,255,255,0.03); }
+.nav-item.active { color: #FFD166; background: rgba(255,209,102,0.07); border-left-color: #FFD166; }
+.nav-icon { font-size: 16px; width: 20px; text-align: center; }
+.nav-section { font-size: 9px; letter-spacing: 0.12em; color: #374151; padding: 14px 24px 6px; font-weight: 700; }
+
+/* ── MAIN ── */
+.main { flex: 1; padding: 32px 36px; overflow-y: auto; max-width: 900px; }
+.screen { display: none; animation: fadeIn 0.2s ease; }
+.screen.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── COMPONENTS ── */
+.page-title { font-size: 24px; font-weight: 800; color: #f0f2f8; margin-bottom: 4px; }
+.page-sub { font-size: 13px; color: #6b7280; margin-bottom: 28px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; }
+.badge-gold { background: rgba(255,209,102,0.12); color: #FFD166; border: 1px solid rgba(255,209,102,0.3); }
+.badge-green { background: rgba(74,222,128,0.1); color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
+.badge-red { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+.badge-blue { background: rgba(96,165,250,0.1); color: #60a5fa; border: 1px solid rgba(96,165,250,0.25); }
+.badge-purple { background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.25); }
+
+.card { background: #0d1117; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px 22px; }
+.card-highlight { background: linear-gradient(135deg, #131c2e, #0d1117); border: 1px solid rgba(255,209,102,0.18); border-radius: 14px; padding: 22px 24px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+
+.stat-label { font-size: 10px; color: #6b7280; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 6px; }
+.stat-value { font-size: 22px; font-weight: 800; }
+.stat-sub { font-size: 11px; color: #6b7280; margin-top: 4px; }
+.stat-up { color: #4ade80; }
+.stat-down { color: #f87171; }
+.gold { color: #FFD166; }
+
+.section-title { font-size: 11px; font-weight: 700; color: #6b7280; letter-spacing: 0.1em; margin-bottom: 12px; margin-top: 24px; }
+
+/* Credit Card Visual */
+.cc-card {
+  background: linear-gradient(135deg, #1a1f35, #0d1117);
+  border-radius: 14px; padding: 20px 22px; position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08); min-height: 120px;
+}
+.cc-card::before { content: ''; position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(255,209,102,0.12), transparent 70%); border-radius: 50%; }
+.cc-bank { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; opacity: 0.7; }
+.cc-points { font-size: 28px; font-weight: 900; margin: 8px 0 4px; }
+.cc-label { font-size: 10px; color: #6b7280; }
+.cc-value { font-size: 13px; font-weight: 700; color: #FFD166; margin-top: 6px; }
+.cc-expiry { position: absolute; bottom: 16px; right: 20px; font-size: 10px; color: #4b5563; }
+
+/* Progress bar */
+.prog-bar { height: 4px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; margin-top: 8px; }
+.prog-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+
+/* Table */
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table th { padding: 9px 14px; text-align: left; color: #4b5563; font-weight: 600; font-size: 10px; letter-spacing: 0.07em; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.table td { padding: 13px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* Airline logos (emoji stand-ins for MVP) */
+.airline-logo { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+
+/* Marketplace listing */
+.listing { background: #0d1117; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px 18px; display: flex; align-items: center; gap: 16px; margin-bottom: 10px; transition: border-color 0.15s; cursor: pointer; }
+.listing:hover { border-color: rgba(255,209,102,0.3); }
+
+/* Lounge card */
+.lounge-card { background: #0d1117; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.15s; }
+.lounge-card:hover { border-color: rgba(255,209,102,0.3); transform: translateY(-1px); }
+
+/* Premium tier */
+.tier-card { border-radius: 16px; padding: 24px; position: relative; overflow: hidden; }
+.tier-free { background: #0d1117; border: 1px solid rgba(255,255,255,0.07); }
+.tier-premium { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid rgba(255,209,102,0.35); }
+.tier-elite { background: linear-gradient(135deg, #1a0a2e, #0d0d1f); border: 1px solid rgba(167,139,250,0.4); }
+.tier-name { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 8px; }
+.tier-price { font-size: 28px; font-weight: 900; margin-bottom: 4px; }
+.tier-feature { font-size: 12px; color: #9ca3af; padding: 5px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.tier-feature:last-child { border-bottom: none; }
+.check { color: #4ade80; font-size: 12px; }
+.cross { color: #374151; font-size: 12px; }
+
+/* WhatsApp CTA */
+.wa-bar { background: rgba(37,211,102,0.08); border: 1px solid rgba(37,211,102,0.25); border-radius: 10px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+
+/* Top bar */
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #FFD166, #FF9F1C); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #080c14; }
+.notif { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+.btn-gold { background: linear-gradient(135deg, #FFD166, #FF9F1C); color: #080c14; }
+.btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: #9ca3af; border: 1px solid rgba(255,255,255,0.1); }
+.btn-ghost:hover { background: rgba(255,255,255,0.04); color: #e8eaf0; }
+.btn-green { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+.btn-red { background: rgba(248,113,113,0.1); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+
+/* Alert */
+.alert { border-radius: 10px; padding: 12px 16px; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.alert-warn { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); }
+.alert-info { background: rgba(96,165,250,0.07); border: 1px solid rgba(96,165,250,0.2); }
+.alert-success { background: rgba(74,222,128,0.07); border: 1px solid rgba(74,222,128,0.2); }
+
+/* Mobile hint */
+.mobile-hint { display: none; }
+
+@media (max-width: 760px) {
+  .sidebar { display: none; }
+  .main { padding: 20px 16px; }
+  .mobile-hint { display: block; background: rgba(255,209,102,0.08); border: 1px solid rgba(255,209,102,0.2); border-radius: 10px; padding: 10px 14px; font-size: 12px; color: #FFD166; margin-bottom: 16px; text-align: center; }
+  .mobile-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #0d1117; border-top: 1px solid rgba(255,255,255,0.08); display: flex; z-index: 100; }
+  .mobile-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px; cursor: pointer; font-size: 9px; color: #4b5563; transition: color 0.15s; }
+  .mobile-nav-item.active { color: #FFD166; }
+  .mobile-nav-item .mn-icon { font-size: 20px; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  body { padding-bottom: 70px; }
+}
+
+/* Onboarding screen */
+.onboard-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; }
+.onboard-logo { font-size: 64px; font-weight: 900; letter-spacing: 0.1em; background: linear-gradient(135deg, #FFD166, #FF9F1C, #FFD166); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+.onboard-tagline { font-size: 18px; color: #9ca3af; max-width: 360px; line-height: 1.6; margin-bottom: 12px; }
+.onboard-stats { display: flex; gap: 32px; margin: 24px 0 32px; }
+.onboard-stat { text-align: center; }
+.onboard-stat .val { font-size: 24px; font-weight: 800; color: #FFD166; }
+.onboard-stat .lbl { font-size: 10px; color: #6b7280; letter-spacing: 0.08em; margin-top: 2px; }
+.feature-pill { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 12px 16px; text-align: left; width: 100%; max-width: 360px; margin-bottom: 8px; }
+.feature-pill .icon { font-size: 20px; }
+.feature-pill .text strong { display: block; font-size: 13px; font-weight: 600; }
+.feature-pill .text span { font-size: 11px; color: #6b7280; }
+
+/* MVP label */
+.mvp-tag { position: fixed; top: 16px; right: 16px; background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.35); color: #a78bfa; padding: 5px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; z-index: 999; }
+</style>
+</head>
+<body>
+
+<div class="mvp-tag">MVP SCREENS — APEX</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="wordmark">APEX</div>
+      <div class="sub">MAXIMIZE EVERY POINT</div>
+    </div>
+    <div class="nav-section">OVERVIEW</div>
+    <div class="nav-item active" onclick="show('dashboard')"><span class="nav-icon">⬡</span> Dashboard</div>
+    <div class="nav-item" onclick="show('cards')"><span class="nav-icon">💳</span> My Cards & Points</div>
+    <div class="nav-section">OPTIMIZE</div>
+    <div class="nav-item" onclick="show('optimize')"><span class="nav-icon">🧠</span> Points Intelligence</div>
+    <div class="nav-item" onclick="show('transfer')"><span class="nav-icon">✈️</span> Airline Transfers</div>
+    <div class="nav-section">MARKETPLACE</div>
+    <div class="nav-item" onclick="show('market')"><span class="nav-icon">🛒</span> Miles Marketplace</div>
+    <div class="nav-item" onclick="show('lounges')"><span class="nav-icon">🛋️</span> Lounge Access</div>
+    <div class="nav-section">ACCOUNT</div>
+    <div class="nav-item" onclick="show('premium')"><span class="nav-icon">⭐</span> Premium Plans</div>
+    <div class="nav-item" onclick="show('onboard')"><span class="nav-icon">◀</span> App Intro</div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- Mobile nav hint -->
+    <div class="mobile-hint">Tap the nav icons below to explore screens ↓</div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: ONBOARD
+    ════════════════════════════════════════ -->
+    <div id="s-onboard" class="screen">
+      <div class="onboard-wrap">
+        <div style="font-size:48px;margin-bottom:16px;">✈️</div>
+        <div class="onboard-logo">APEX</div>
+        <div style="font-size:11px;letter-spacing:0.15em;color:#6b7280;margin-bottom:16px;font-weight:600;">MAXIMIZE EVERY POINT · GLOBALLY</div>
+        <div class="onboard-tagline">Your credit cards are hiding a fortune. <span style="color:#FFD166;font-weight:600;">APEX finds it, values it, and puts it to work.</span></div>
+        <div class="onboard-stats">
+          <div class="onboard-stat"><div class="val">₹2.3T</div><div class="lbl">POINTS UNREDEEMED<br>GLOBALLY / YEAR</div></div>
+          <div class="onboard-stat"><div class="val">47M</div><div class="lbl">CARDHOLDERS<br>MISSING OUT</div></div>
+          <div class="onboard-stat"><div class="val">3.2x</div><div class="lbl">AVERAGE VALUE<br>UNLOCKED</div></div>
+        </div>
+        <div class="feature-pill"><span class="icon">💳</span><div class="text"><strong>All Cards in One Place</strong><span>Bills, points, scores — unified dashboard</span></div></div>
+        <div class="feature-pill"><span class="icon">🧠</span><div class="text"><strong>AI Points Optimizer</strong><span>Best airline, best ratio, best timing</span></div></div>
+        <div class="feature-pill"><span class="icon">🛒</span><div class="text"><strong>Miles Marketplace</strong><span>Buy, sell, gift — earn commission</span></div></div>
+        <div class="feature-pill"><span class="icon">🛋️</span><div class="text"><strong>Universal Lounge Access</strong><span>Priority Pass, Dreamfolks, Centurion & more</span></div></div>
+        <div style="margin-top:28px;display:flex;gap:12px;">
+          <button class="btn btn-gold" onclick="show('dashboard')" style="padding:14px 32px;font-size:15px;">Get Started</button>
+          <button class="btn btn-ghost" onclick="show('premium')">See Plans</button>
+        </div>
+        <div style="font-size:11px;color:#374151;margin-top:16px;">UAE · India · UK · Singapore · USA · Africa</div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: DASHBOARD
+    ════════════════════════════════════════ -->
+    <div id="s-dashboard" class="screen active">
+      <div class="topbar">
+        <div>
+          <div class="page-title">Good morning, Shaf 👋</div>
+          <div class="page-sub">You have <span style="color:#FFD166;font-weight:600;">3 active alerts</span> · Friday 6 Mar 2026</div>
+        </div>
+        <div class="topbar-right">
+          <div class="notif">🔔</div>
+          <div class="avatar">S</div>
+        </div>
+      </div>
+
+      <!-- Total value hero -->
+      <div class="card-highlight" style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div class="stat-label">TOTAL POINTS VALUE ACROSS ALL CARDS</div>
+            <div style="font-size:42px;font-weight:900;color:#FFD166;line-height:1;">₹1,24,580</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:6px;">Across 4 cards · 3,41,200 total points · <span style="color:#4ade80;">↑ 12% this month</span></div>
+          </div>
+          <div style="text-align:right;">
+            <div class="badge badge-gold" style="margin-bottom:8px;">⭐ PREMIUM</div>
+            <div style="font-size:12px;color:#6b7280;">Credit Score</div>
+            <div style="font-size:24px;font-weight:800;color:#4ade80;">798</div>
+            <div style="font-size:10px;color:#4ade80;">EXCELLENT</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;">
+          <button class="btn btn-gold" onclick="show('optimize')">🧠 Optimize Now</button>
+          <button class="btn btn-ghost" onclick="show('transfer')">✈️ Transfer Miles</button>
+          <button class="btn btn-ghost" onclick="show('market')">🛒 Marketplace</button>
+        </div>
+      </div>
+
+      <!-- Stat row -->
+      <div class="grid-4">
+        <div class="card"><div class="stat-label">CARDS LINKED</div><div class="stat-value" style="font-size:28px;">4</div><div class="stat-sub">2 due this week</div></div>
+        <div class="card"><div class="stat-label">EXPIRING SOON</div><div class="stat-value" style="font-size:28px;color:#fbbf24;">28K</div><div class="stat-sub">Axis · 45 days</div></div>
+        <div class="card"><div class="stat-label">MARKETPLACE</div><div class="stat-value" style="font-size:28px;color:#4ade80;">₹8,200</div><div class="stat-sub">Earned this month</div></div>
+        <div class="card"><div class="stat-label">LOUNGES USED</div><div class="stat-value" style="font-size:28px;color:#a78bfa;">6</div><div class="stat-sub">This year · 3 networks</div></div>
+      </div>
+
+      <!-- Alerts -->
+      <div class="section-title">⚠️ ACTION REQUIRED</div>
+      <div class="alert alert-warn">
+        <span style="font-size:18px;">⏰</span>
+        <div><div style="font-size:13px;font-weight:600;color:#fbbf24;">HDFC Infinia — Bill due in 3 days</div><div style="font-size:12px;color:#9ca3af;margin-top:2px;">₹34,820 outstanding · Pay now to earn 34,820 reward points</div></div>
+        <button class="btn btn-gold" style="margin-left:auto;padding:6px 14px;font-size:12px;">Pay Now</button>
+      </div>
+      <div class="alert alert-warn">
+        <span style="font-size:18px;">💨</span>
+        <div><div style="font-size:13px;font-weight:600;color:#fbbf24;">28,000 Axis Points expiring in 45 days</div><div style="font-size:12px;color:#9ca3af;margin-top:2px;">Worth ₹14,000 · Transfer to Emirates Skywards for best value</div></div>
+        <button class="btn btn-ghost" onclick="show('transfer')" style="margin-left:auto;padding:6px 14px;font-size:12px;">Transfer →</button>
+      </div>
+      <div class="alert alert-success">
+        <span style="font-size:18px;">🛒</span>
+        <div><div style="font-size:13px;font-weight:600;color:#4ade80;">Your Emirates listing sold — ₹6,800 credited</div><div style="font-size:12px;color:#9ca3af;margin-top:2px;">25,000 miles · 3 Mar 2026 · APEX commission: ₹850</div></div>
+      </div>
+
+      <!-- Payment schedule -->
+      <div class="section-title">📅 PAYMENT SCHEDULE</div>
+      <div class="card">
+        <table class="table">
+          <thead><tr><th>CARD</th><th>DUE DATE</th><th>AMOUNT</th><th>POINTS EARNED</th><th>STATUS</th></tr></thead>
+          <tbody>
+            <tr><td><strong>HDFC Infinia</strong></td><td style="color:#f87171;font-weight:600;">9 Mar</td><td>₹34,820</td><td><span style="color:#FFD166;">+34,820 pts</span></td><td><span class="badge badge-red">DUE SOON</span></td></tr>
+            <tr><td><strong>Amex Plat</strong></td><td style="color:#fbbf24;">14 Mar</td><td>₹18,450</td><td><span style="color:#FFD166;">+36,900 pts</span></td><td><span class="badge badge-gold">UPCOMING</span></td></tr>
+            <tr><td><strong>Axis Magnus</strong></td><td style="color:#6b7280;">22 Mar</td><td>₹9,200</td><td><span style="color:#FFD166;">+18,400 pts</span></td><td><span class="badge badge-blue">SCHEDULED</span></td></tr>
+            <tr><td><strong>SBI Elite</strong></td><td style="color:#6b7280;">28 Mar</td><td>₹4,100</td><td><span style="color:#FFD166;">+4,100 pts</span></td><td><span class="badge badge-blue">SCHEDULED</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: CARDS & POINTS
+    ════════════════════════════════════════ -->
+    <div id="s-cards" class="screen">
+      <div class="page-title">My Cards & Points</div>
+      <div class="page-sub">341,200 total points across 4 cards · Est. value ₹1,24,580</div>
+      <button class="btn btn-gold" style="margin-bottom:20px;">+ Add Card</button>
+
+      <div class="grid-2">
+        <div class="cc-card" style="background:linear-gradient(135deg,#1c1f35,#0a0e1a);border-color:rgba(255,209,102,0.3);">
+          <div class="cc-bank" style="color:#FFD166;">HDFC INFINIA</div>
+          <div class="cc-points">1,42,800</div>
+          <div class="cc-label">Reward Points</div>
+          <div class="cc-value">≈ ₹71,400 · Best: KrisFlyer 1:1</div>
+          <div class="cc-expiry">Expires: Dec 2026</div>
+          <div style="margin-top:10px;"><span class="badge badge-gold">PREMIUM</span></div>
+        </div>
+        <div class="cc-card" style="background:linear-gradient(135deg,#1a1a35,#0a0a1a);border-color:rgba(167,139,250,0.3);">
+          <div class="cc-bank" style="color:#a78bfa;">AMEX PLATINUM</div>
+          <div class="cc-points">98,500</div>
+          <div class="cc-label">Membership Rewards</div>
+          <div class="cc-value">≈ ₹29,550 · Best: BA Avios 1:1</div>
+          <div class="cc-expiry">No Expiry</div>
+          <div style="margin-top:10px;"><span class="badge badge-purple">MR POINTS</span></div>
+        </div>
+        <div class="cc-card" style="background:linear-gradient(135deg,#1a1c20,#0d0f14);border-color:rgba(248,113,113,0.25);">
+          <div class="cc-bank" style="color:#f87171;">AXIS MAGNUS</div>
+          <div class="cc-points">28,000</div>
+          <div class="cc-label">Edge Reward Points</div>
+          <div class="cc-value">≈ ₹14,000 · ⚠️ Expiring 45 days</div>
+          <div class="cc-expiry" style="color:#f87171;">⚠️ Apr 20, 2026</div>
+          <div style="margin-top:10px;"><span class="badge badge-red">EXPIRING SOON</span></div>
+        </div>
+        <div class="cc-card" style="background:linear-gradient(135deg,#1a1c1a,#0d0f0d);border-color:rgba(74,222,128,0.2);">
+          <div class="cc-bank" style="color:#4ade80;">SBI ELITE</div>
+          <div class="cc-points">71,900</div>
+          <div class="cc-label">Reward Points</div>
+          <div class="cc-value">≈ ₹9,630 · Best: Air India FFR</div>
+          <div class="cc-expiry">Expires: Sep 2026</div>
+          <div style="margin-top:10px;"><span class="badge badge-green">ACTIVE</span></div>
+        </div>
+      </div>
+
+      <div class="section-title">📊 SPEND BREAKDOWN THIS MONTH</div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div>
+            <div class="stat-label">TOTAL SPEND</div>
+            <div style="font-size:24px;font-weight:800;">₹66,570</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:4px;">Across 4 cards this month</div>
+          </div>
+          <div>
+            <div class="stat-label">POINTS EARNED</div>
+            <div style="font-size:24px;font-weight:800;color:#FFD166;">+94,220</div>
+            <div style="font-size:12px;color:#6b7280;margin-top:4px;">Est. ₹47,110 value</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <div style="font-size:11px;color:#4b5563;margin-bottom:8px;">CATEGORY BREAKDOWN</div>
+          {[['Travel','35%','#60a5fa'],['Dining','22%','#4ade80'],['Shopping','18%','#FFD166'],['Fuel','12%','#f97316'],['Others','13%','#6b7280']].map(([c,p])=>'')}
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Travel</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:35%;background:#60a5fa;"></div></div><span style="font-size:12px;color:#60a5fa;width:30px;text-align:right;">35%</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Dining</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:22%;background:#4ade80;"></div></div><span style="font-size:12px;color:#4ade80;width:30px;text-align:right;">22%</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Shopping</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:18%;background:#FFD166;"></div></div><span style="font-size:12px;color:#FFD166;width:30px;text-align:right;">18%</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Fuel</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:12%;background:#f97316;"></div></div><span style="font-size:12px;color:#f97316;width:30px;text-align:right;">12%</span></div>
+            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Others</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:13%;background:#6b7280;"></div></div><span style="font-size:12px;color:#6b7280;width:30px;text-align:right;">13%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: POINTS INTELLIGENCE
+    ════════════════════════════════════════ -->
+    <div id="s-optimize" class="screen">
+      <div class="page-title">Points Intelligence</div>
+      <div class="page-sub">AI-powered recommendations to maximize every point you own</div>
+
+      <div class="alert alert-success" style="margin-bottom:20px;">
+        <span style="font-size:20px;">💡</span>
+        <div><div style="font-size:13px;font-weight:700;color:#4ade80;">APEX recommends: Transfer 98,500 Amex MR → BA Avios now</div><div style="font-size:12px;color:#9ca3af;margin-top:3px;">BA is offering a 25% transfer bonus until 31 Mar · Your 98,500 pts become 1,23,125 Avios worth ₹61,563</div></div>
+        <button class="btn btn-gold" onclick="show('transfer')" style="margin-left:auto;padding:6px 14px;font-size:12px;white-space:nowrap;">Do This →</button>
+      </div>
+
+      <div class="section-title">🏆 TOP RECOMMENDATIONS</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+        <div class="card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;">
+          <div style="width:40px;height:40px;background:rgba(255,209,102,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">✈️</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;">Transfer Axis 28K → Emirates Skywards</div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:2px;">Before expiry Apr 20 · Gets you Dubai–London return in economy · Cash value ₹42,000</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-size:16px;font-weight:800;color:#4ade80;">3.0x</div>
+            <div style="font-size:10px;color:#6b7280;">VALUE GAIN</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;">
+          <div style="width:40px;height:40px;background:rgba(96,165,250,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🌐</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;">Use HDFC Infinia for all travel bookings</div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:2px;">10x points on travel vs 1x on your current default card · Extra 9,000 pts per ₹10K spend</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-size:16px;font-weight:800;color:#60a5fa;">10x</div>
+            <div style="font-size:10px;color:#6b7280;">MULTIPLIER</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;">
+          <div style="width:40px;height:40px;background:rgba(167,139,250,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">💸</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;">List 50K SBI points on Marketplace</div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:2px;">Current bids at ₹0.14/pt = ₹7,000 cash · Better than direct redemption at ₹0.08/pt</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-size:16px;font-weight:800;color:#a78bfa;">₹7K</div>
+            <div style="font-size:10px;color:#6b7280;">CASH OUT</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">💳 BEST CARD FOR EACH CATEGORY</div>
+      <div class="card">
+        <table class="table">
+          <thead><tr><th>SPEND CATEGORY</th><th>BEST CARD</th><th>EARN RATE</th><th>VS YOUR CURRENT</th></tr></thead>
+          <tbody>
+            <tr><td>✈️ Flights & Hotels</td><td><strong>HDFC Infinia</strong></td><td><span class="gold">10x pts</span></td><td><span class="stat-up">↑ +4.2x better</span></td></tr>
+            <tr><td>🍽️ Dining</td><td><strong>Amex Platinum</strong></td><td><span class="gold">5x MR pts</span></td><td><span class="stat-up">↑ +3.0x better</span></td></tr>
+            <tr><td>🛒 Online Shopping</td><td><strong>Axis Magnus</strong></td><td><span class="gold">12 Edge/₹200</span></td><td><span class="stat-up">↑ +2.1x better</span></td></tr>
+            <tr><td>⛽ Fuel</td><td><strong>SBI Elite</strong></td><td><span class="gold">13x pts</span></td><td><span class="stat-up">↑ +5.0x better</span></td></tr>
+            <tr><td>💊 Medical</td><td><strong>HDFC Infinia</strong></td><td><span class="gold">5x pts</span></td><td><span class="stat-up">↑ +1.8x better</span></td></tr>
+            <tr><td>🎬 Entertainment</td><td><strong>Amex Platinum</strong></td><td><span class="gold">5x MR pts</span></td><td><span class="stat-up">↑ +2.5x better</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: AIRLINE TRANSFER
+    ════════════════════════════════════════ -->
+    <div id="s-transfer" class="screen">
+      <div class="page-title">Airline Transfer Engine</div>
+      <div class="page-sub">Compare every transfer option. Find the best ratio. Move miles in seconds.</div>
+
+      <div class="card-highlight" style="margin-bottom:20px;">
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <div>
+            <div class="stat-label">SELECT POINTS TO TRANSFER</div>
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+              <button class="btn btn-gold" style="font-size:12px;padding:7px 14px;">HDFC 142,800 pts</button>
+              <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px;">Amex 98,500 MR</button>
+              <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px;">Axis 28,000 pts ⚠️</button>
+              <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px;">SBI 71,900 pts</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:#6b7280;">Showing best options for <span style="color:#FFD166;font-weight:600;">HDFC Infinia 142,800 points</span></div>
+      </div>
+
+      <div class="section-title">✈️ TRANSFER OPTIONS — RANKED BY VALUE</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+
+        <div class="card" style="border-color:rgba(74,222,128,0.3);padding:16px 18px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:44px;height:44px;background:rgba(255,153,0,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+            <div style="flex:1;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                <span style="font-size:14px;font-weight:700;">Singapore Airlines KrisFlyer</span>
+                <span class="badge badge-green">BEST RATIO</span>
+              </div>
+              <div style="font-size:11px;color:#9ca3af;">142,800 HDFC pts → 142,800 KrisFlyer miles · 1:1 ratio · ~48hr processing</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:20px;font-weight:900;color:#4ade80;">1:1</div>
+              <div style="font-size:10px;color:#6b7280;">RATIO</div>
+              <div style="font-size:12px;color:#4ade80;font-weight:600;margin-top:2px;">≈ ₹1.14L value</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-size:11px;color:#9ca3af;">🎯 Best for: SIN-LHR Business · 105K miles · Cash: ₹2.8L</span>
+            <button class="btn btn-green" style="margin-left:auto;padding:5px 14px;font-size:11px;">Transfer Now</button>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px 18px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:44px;height:44px;background:rgba(0,100,200,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+            <div style="flex:1;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                <span style="font-size:14px;font-weight:700;">British Airways Avios</span>
+                <span class="badge badge-gold">+25% BONUS NOW</span>
+              </div>
+              <div style="font-size:11px;color:#9ca3af;">142,800 pts → 178,500 Avios (with bonus) · 1:1.25 ratio · Until 31 Mar</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:20px;font-weight:900;color:#FFD166;">1:1.25</div>
+              <div style="font-size:10px;color:#6b7280;">WITH BONUS</div>
+              <div style="font-size:12px;color:#FFD166;font-weight:600;margin-top:2px;">≈ ₹89,250 value</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-size:11px;color:#9ca3af;">🎯 Best for: LHR-BOM Business · 90K Avios · Cash: ₹2.4L</span>
+            <button class="btn btn-ghost" style="margin-left:auto;padding:5px 14px;font-size:11px;">Transfer</button>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px 18px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:44px;height:44px;background:rgba(255,50,50,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Emirates Skywards</div>
+              <div style="font-size:11px;color:#9ca3af;">142,800 pts → 142,800 Skywards miles · 1:1 · Instant transfer</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:20px;font-weight:900;color:#e8eaf0;">1:1</div>
+              <div style="font-size:10px;color:#6b7280;">RATIO</div>
+              <div style="font-size:12px;color:#9ca3af;margin-top:2px;">≈ ₹71,400 value</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-size:11px;color:#9ca3af;">🎯 Best for: DXB-LHR Business · 72.5K miles · Cash: ₹2.1L</span>
+            <button class="btn btn-ghost" style="margin-left:auto;padding:5px 14px;font-size:11px;">Transfer</button>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px 18px;opacity:0.7;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:44px;height:44px;background:rgba(255,150,0,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Air India Flying Returns</div>
+              <div style="font-size:11px;color:#9ca3af;">142,800 pts → 71,400 FF miles · 2:1 ratio · 5-7 days processing</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:20px;font-weight:900;color:#f87171;">2:1</div>
+              <div style="font-size:10px;color:#6b7280;">POOR RATIO</div>
+              <div style="font-size:12px;color:#f87171;font-weight:600;margin-top:2px;">≈ ₹28,560 value</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: MARKETPLACE
+    ════════════════════════════════════════ -->
+    <div id="s-market" class="screen">
+      <div class="page-title">Miles Marketplace</div>
+      <div class="page-sub">Buy, sell and gift airline miles. Peer-to-peer. Secure. APEX-facilitated.</div>
+
+      <div class="grid-3" style="margin-bottom:20px;">
+        <div class="card"><div class="stat-label">ACTIVE LISTINGS</div><div class="stat-value" style="font-size:28px;color:#FFD166;">2,847</div><div class="stat-sub">Across 18 programs</div></div>
+        <div class="card"><div class="stat-label">YOUR EARNINGS</div><div class="stat-value" style="font-size:28px;color:#4ade80;">₹14,200</div><div class="stat-sub">All-time from sales</div></div>
+        <div class="card"><div class="stat-label">BEST BID NOW</div><div class="stat-value" style="font-size:28px;color:#60a5fa;">KrisFlyer</div><div class="stat-sub">₹0.22/mile · High demand</div></div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+        <button class="btn btn-gold">+ List My Miles</button>
+        <button class="btn btn-ghost">🔍 Browse Listings</button>
+        <button class="btn btn-ghost">📈 Market Rates</button>
+      </div>
+
+      <div class="section-title">🔥 LIVE LISTINGS</div>
+      <div class="listing">
+        <div style="width:44px;height:44px;background:rgba(255,153,0,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;">50,000 Emirates Skywards Miles</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px;">Listed by @UAE_Traveller · Verified seller · 4.9★ · 14 trades</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-size:16px;font-weight:800;color:#FFD166;">₹9,500</div>
+          <div style="font-size:10px;color:#6b7280;">₹0.19/mile</div>
+          <button class="btn btn-gold" style="margin-top:6px;padding:5px 14px;font-size:11px;">Buy Now</button>
+        </div>
+      </div>
+      <div class="listing">
+        <div style="width:44px;height:44px;background:rgba(0,100,200,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;">120,000 British Airways Avios</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px;">Listed by @London_Points · Verified seller · 4.7★ · 8 trades</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-size:16px;font-weight:800;color:#FFD166;">₹21,600</div>
+          <div style="font-size:10px;color:#6b7280;">₹0.18/mile</div>
+          <button class="btn btn-gold" style="margin-top:6px;padding:5px 14px;font-size:11px;">Buy Now</button>
+        </div>
+      </div>
+      <div class="listing">
+        <div style="width:44px;height:44px;background:rgba(200,200,0,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;">80,000 Singapore KrisFlyer Miles</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px;">Listed by @SG_Flyer99 · Verified · 5.0★ · 22 trades · FAST SELLER</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-size:16px;font-weight:800;color:#FFD166;">₹17,600</div>
+          <div style="font-size:10px;color:#6b7280;">₹0.22/mile</div>
+          <button class="btn btn-gold" style="margin-top:6px;padding:5px 14px;font-size:11px;">Buy Now</button>
+        </div>
+      </div>
+      <div class="listing">
+        <div style="width:44px;height:44px;background:rgba(100,200,100,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;">35,000 Air India Flying Returns</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px;">Listed by @Mumbai_Miles · Verified · 4.5★</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-size:16px;font-weight:800;color:#FFD166;">₹3,150</div>
+          <div style="font-size:10px;color:#6b7280;">₹0.09/mile</div>
+          <button class="btn btn-gold" style="margin-top:6px;padding:5px 14px;font-size:11px;">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="section-title">💰 APEX COMMISSION STRUCTURE</div>
+      <div class="card">
+        <table class="table">
+          <thead><tr><th>TRANSACTION TYPE</th><th>APEX FEE</th><th>EXAMPLE</th></tr></thead>
+          <tbody>
+            <tr><td>Miles sale (seller)</td><td><span style="color:#FFD166;font-weight:600;">10%</span></td><td style="color:#9ca3af;">Sell ₹10K miles → APEX earns ₹1,000</td></tr>
+            <tr><td>Miles purchase (buyer)</td><td><span style="color:#FFD166;font-weight:600;">5%</span></td><td style="color:#9ca3af;">Buy ₹10K miles → APEX earns ₹500</td></tr>
+            <tr><td>AI Recommendation (Premium)</td><td><span style="color:#FFD166;font-weight:600;">Included</span></td><td style="color:#9ca3af;">Best transfer/sell timing analysis</td></tr>
+            <tr><td>Broker listings</td><td><span style="color:#FFD166;font-weight:600;">8%</span></td><td style="color:#9ca3af;">Professional brokers pay lower rate</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: LOUNGES
+    ════════════════════════════════════════ -->
+    <div id="s-lounges" class="screen">
+      <div class="page-title">Lounge Access Hub</div>
+      <div class="page-sub">1,400+ lounges globally. Access with APEX — regardless of which card you hold.</div>
+
+      <div class="grid-4" style="margin-bottom:20px;">
+        <div class="card" style="text-align:center;padding:16px 12px;">
+          <div style="font-size:28px;margin-bottom:6px;">🌐</div>
+          <div style="font-size:12px;font-weight:700;color:#FFD166;">Priority Pass</div>
+          <div style="font-size:11px;color:#6b7280;margin-top:3px;">1,300+ lounges</div>
+          <div class="badge badge-green" style="margin-top:8px;">LINKED ✓</div>
+        </div>
+        <div class="card" style="text-align:center;padding:16px 12px;">
+          <div style="font-size:28px;margin-bottom:6px;">🇮🇳</div>
+          <div style="font-size:12px;font-weight:700;color:#60a5fa;">Dreamfolks</div>
+          <div style="font-size:11px;color:#6b7280;margin-top:3px;">25+ India airports</div>
+          <div class="badge badge-green" style="margin-top:8px;">LINKED ✓</div>
+        </div>
+        <div class="card" style="text-align:center;padding:16px 12px;">
+          <div style="font-size:28px;margin-bottom:6px;">🏢</div>
+          <div style="font-size:12px;font-weight:700;color:#f97316;">Adani Lounges</div>
+          <div style="font-size:11px;color:#6b7280;margin-top:3px;">7 India airports</div>
+          <div class="badge badge-green" style="margin-top:8px;">LINKED ✓</div>
+        </div>
+        <div class="card" style="text-align:center;padding:16px 12px;">
+          <div style="font-size:28px;margin-bottom:6px;">⚫</div>
+          <div style="font-size:12px;font-weight:700;color:#a78bfa;">Centurion</div>
+          <div style="font-size:11px;color:#6b7280;margin-top:3px;">40+ cities</div>
+          <div class="badge badge-purple" style="margin-top:8px;">ELITE ONLY</div>
+        </div>
+      </div>
+
+      <div class="section-title">📍 NEARBY LOUNGES</div>
+      <div class="grid-2">
+        <div class="lounge-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div><div style="font-size:14px;font-weight:700;">Emirates Business Lounge</div><div style="font-size:11px;color:#9ca3af;margin-top:2px;">Dubai Intl · Terminal 3 · Concourse B</div></div>
+            <span class="badge badge-green">OPEN</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <span style="font-size:10px;color:#9ca3af;">🍽️ Full dining</span>
+            <span style="font-size:10px;color:#9ca3af;">🛁 Shower</span>
+            <span style="font-size:10px;color:#9ca3af;">📶 Fast WiFi</span>
+            <span style="font-size:10px;color:#9ca3af;">🛏️ Rest pods</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="badge badge-blue">Priority Pass</span>
+            <button class="btn btn-gold" style="padding:6px 14px;font-size:11px;">Access Now</button>
+          </div>
+        </div>
+        <div class="lounge-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div><div style="font-size:14px;font-weight:700;">Marhaba Lounge</div><div style="font-size:11px;color:#9ca3af;margin-top:2px;">Dubai Intl · Terminal 1 · Gate B</div></div>
+            <span class="badge badge-green">OPEN</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <span style="font-size:10px;color:#9ca3af;">🍽️ Buffet</span>
+            <span style="font-size:10px;color:#9ca3af;">📶 WiFi</span>
+            <span style="font-size:10px;color:#9ca3af;">💆 Spa</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="badge badge-blue">Dreamfolks</span>
+            <button class="btn btn-gold" style="padding:6px 14px;font-size:11px;">Access Now</button>
+          </div>
+        </div>
+        <div class="lounge-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div><div style="font-size:14px;font-weight:700;">GMRG T3 Lounge</div><div style="font-size:11px;color:#9ca3af;margin-top:2px;">Delhi IGI · Terminal 3</div></div>
+            <span class="badge badge-green">OPEN</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <span style="font-size:10px;color:#9ca3af;">🍱 Snacks</span>
+            <span style="font-size:10px;color:#9ca3af;">📶 WiFi</span>
+            <span style="font-size:10px;color:#9ca3af;">🖨️ Business centre</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="badge badge-orange" style="background:rgba(249,115,22,0.1);color:#f97316;border:1px solid rgba(249,115,22,0.3);">Dreamfolks</span>
+            <button class="btn btn-gold" style="padding:6px 14px;font-size:11px;">Access Now</button>
+          </div>
+        </div>
+        <div class="lounge-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+            <div><div style="font-size:14px;font-weight:700;">Centurion Lounge LHR</div><div style="font-size:11px;color:#9ca3af;margin-top:2px;">London Heathrow · Terminal 3</div></div>
+            <span class="badge badge-purple">ELITE</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            <span style="font-size:10px;color:#9ca3af;">🍽️ Chef dining</span>
+            <span style="font-size:10px;color:#9ca3af;">🛁 Private shower</span>
+            <span style="font-size:10px;color:#9ca3af;">🥂 Open bar</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span class="badge badge-purple">Centurion</span>
+            <button class="btn btn-ghost" style="padding:6px 14px;font-size:11px;">Upgrade →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wa-bar">
+        <span style="font-size:22px;">💬</span>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#25d366;">WhatsApp Lounge Alerts</div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:2px;">Get notified on WhatsApp when you arrive at an airport — APEX auto-detects and shows nearest lounges.</div>
+        </div>
+        <button class="btn" style="background:rgba(37,211,102,0.15);color:#25d366;border:1px solid rgba(37,211,102,0.3);margin-left:auto;padding:6px 14px;font-size:12px;white-space:nowrap;">Enable</button>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: PREMIUM
+    ════════════════════════════════════════ -->
+    <div id="s-premium" class="screen">
+      <div class="page-title">Premium Plans</div>
+      <div class="page-sub">Start free. Upgrade when you're ready to maximize.</div>
+
+      <div class="grid-3">
+        <div class="tier-card tier-free">
+          <div class="tier-name" style="color:#9ca3af;">FREE</div>
+          <div class="tier-price">₹0<span style="font-size:14px;font-weight:400;color:#6b7280;">/month</span></div>
+          <div style="font-size:11px;color:#6b7280;margin-bottom:16px;">For casual users</div>
+          <div class="tier-feature"><span class="check">✓</span>Link up to 3 cards</div>
+          <div class="tier-feature"><span class="check">✓</span>Bill due reminders</div>
+          <div class="tier-feature"><span class="check">✓</span>Basic points tracker</div>
+          <div class="tier-feature"><span class="check">✓</span>Marketplace access</div>
+          <div class="tier-feature"><span class="cross">✗</span>AI optimizer</div>
+          <div class="tier-feature"><span class="cross">✗</span>Transfer engine</div>
+          <div class="tier-feature"><span class="cross">✗</span>Expiry alerts</div>
+          <div class="tier-feature"><span class="cross">✗</span>Lounge finder</div>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:18px;">Current Plan</button>
+        </div>
+        <div class="tier-card tier-premium" style="transform:scale(1.03);">
+          <div style="position:absolute;top:14px;right:14px;"><span class="badge badge-gold">POPULAR</span></div>
+          <div class="tier-name" style="color:#FFD166;">PREMIUM</div>
+          <div class="tier-price" style="color:#FFD166;">₹499<span style="font-size:14px;font-weight:400;color:#6b7280;">/month</span></div>
+          <div style="font-size:11px;color:#6b7280;margin-bottom:16px;">For frequent travellers</div>
+          <div class="tier-feature"><span class="check">✓</span>Unlimited cards</div>
+          <div class="tier-feature"><span class="check">✓</span>AI Points Optimizer</div>
+          <div class="tier-feature"><span class="check">✓</span>Full Transfer Engine</div>
+          <div class="tier-feature"><span class="check">✓</span>Expiry alerts</div>
+          <div class="tier-feature"><span class="check">✓</span>Lounge finder (all networks)</div>
+          <div class="tier-feature"><span class="check">✓</span>WhatsApp integration</div>
+          <div class="tier-feature"><span class="cross">✗</span>Centurion access</div>
+          <div class="tier-feature"><span class="cross">✗</span>Priority broker matching</div>
+          <button class="btn btn-gold" style="width:100%;justify-content:center;margin-top:18px;">Upgrade to Premium</button>
+        </div>
+        <div class="tier-card tier-elite">
+          <div class="tier-name" style="color:#a78bfa;">ELITE</div>
+          <div class="tier-price" style="color:#a78bfa;">₹1,499<span style="font-size:14px;font-weight:400;color:#6b7280;">/month</span></div>
+          <div style="font-size:11px;color:#6b7280;margin-bottom:16px;">For power users & HNIs</div>
+          <div class="tier-feature"><span class="check" style="color:#a78bfa;">✓</span>Everything in Premium</div>
+          <div class="tier-feature"><span class="check" style="color:#a78bfa;">✓</span>Centurion lounge access</div>
+          <div class="tier-feature"><span class="check" style="color:#a78bfa;">✓</span>Dedicated APEX advisor</div>
+          <div class="tier-feature"><span class="check" style="color:#a78bfa;">✓</span>Priority broker matching</div>
+          <div class="tier-feature"><span class="check" style="color:#a78bfa;">✓</span>Reduced commission (8%)</div>
+          <div class="tier-feature"><span class="check" style="color:#a78bfa;">✓</span>Multi-currency dashboard</div>
+          <div class="tier-feature"><span class="check" style="color:#a78bfa;">✓</span>Family account (5 users)</div>
+          <button class="btn" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);color:white;width:100%;justify-content:center;margin-top:18px;">Go Elite</button>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;">
+        <div class="section-title">💬 WHATSAPP INTEGRATION</div>
+        <div class="wa-bar">
+          <span style="font-size:28px;">💬</span>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#25d366;">APEX on WhatsApp</div>
+            <div style="font-size:12px;color:#9ca3af;margin-top:4px;">Just like banks are moving to WhatsApp — APEX runs natively there too. Check points, get alerts, approve transfers, buy/sell miles — all from a WhatsApp message. Zero friction for your users.</div>
+            <div style="font-size:11px;color:#6b7280;margin-top:6px;">Available on Premium & Elite · Works with any WhatsApp number globally</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Mobile Bottom Nav -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-item active" onclick="show('dashboard');setMobileActive(this)"><div class="mn-icon">⬡</div>Home</div>
+  <div class="mobile-nav-item" onclick="show('cards');setMobileActive(this)"><div class="mn-icon">💳</div>Cards</div>
+  <div class="mobile-nav-item" onclick="show('optimize');setMobileActive(this)"><div class="mn-icon">🧠</div>Optimize</div>
+  <div class="mobile-nav-item" onclick="show('market');setMobileActive(this)"><div class="mn-icon">🛒</div>Market</div>
+  <div class="mobile-nav-item" onclick="show('lounges');setMobileActive(this)"><div class="mn-icon">🛋️</div>Lounges</div>
+</nav>
+
+<script>
+function show(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('s-' + name)?.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick')?.includes("'" + name + "'")) n.classList.add('active');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function setMobileActive(el) {
+  document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+}
+// Show onboard first
+show('onboard');
+document.querySelectorAll('.nav-item').forEach(n => {
+  if (n.getAttribute('onclick')?.includes("'onboard'")) n.classList.add('active');
+});
+</script>
+</body>
+</html>
