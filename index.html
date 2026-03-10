@@ -303,7 +303,7 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
       <div class="sub">MAXIMIZE EVERY POINT</div>
     </div>
     <div class="nav-section">OVERVIEW</div>
-    <div class="nav-item active" onclick="show('dashboard')"><span class="nav-icon">⬡</span> Dashboard</div>
+    <div class="nav-item" onclick="show('dashboard')"><span class="nav-icon">⬡</span> Dashboard</div>
     <div class="nav-item" onclick="show('cards')"><span class="nav-icon">💳</span> My Cards & Points</div>
     <div class="nav-section">OPTIMIZE</div>
     <div class="nav-item" onclick="show('optimize')"><span class="nav-icon">🧠</span> Points Intelligence</div>
@@ -314,7 +314,7 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     <div class="nav-item" onclick="show('lounges')"><span class="nav-icon">🛋️</span> Lounge Access</div>
     <div class="nav-section">ACCOUNT</div>
     <div class="nav-item" onclick="show('premium')"><span class="nav-icon">⭐</span> Premium Plans</div>
-    <div class="nav-item" onclick="show('onboard')"><span class="nav-icon">◀</span> App Intro</div>
+    <div class="nav-item active" onclick="show('onboard')"><span class="nav-icon">◀</span> App Intro</div>
   </nav>
 
   <!-- MAIN -->
@@ -326,7 +326,7 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     <!-- ════════════════════════════════════════
          SCREEN: ONBOARD (intro + 3-step flow)
     ════════════════════════════════════════ -->
-    <div id="s-onboard" class="screen">
+    <div id="s-onboard" class="screen active">
       <div class="ob-wrap">
 
         <!-- ── INTRO (default view) ── -->
@@ -440,7 +440,7 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     <!-- ════════════════════════════════════════
          SCREEN: DASHBOARD
     ════════════════════════════════════════ -->
-    <div id="s-dashboard" class="screen active">
+    <div id="s-dashboard" class="screen">
       <div class="topbar">
         <div>
           <div class="page-title">Good morning, Shaf 👋</div>
