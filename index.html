@@ -161,7 +161,6 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
 .ob-card-chip { width: 32px; height: 24px; background: linear-gradient(135deg, #FFD166, #FF9F1C); border-radius: 4px; opacity: 0.85; }
 .ob-card-num { font-size: 13px; letter-spacing: 0.18em; color: rgba(255,255,255,0.5); font-weight: 500; }
 .ob-card-name { font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); font-weight: 600; text-transform: uppercase; }
-.ob-card-badge { position: absolute; top: 18px; right: 20px; font-size: 22px; opacity: 0.6; }
 /* Step 1 text */
 .ob-h1 { font-size: 22px; font-weight: 800; color: #f0f2f8; margin-bottom: 8px; letter-spacing: -0.02em; }
 .ob-sub { font-size: 14px; color: #6b7280; max-width: 300px; line-height: 1.6; margin-bottom: 28px; }
@@ -171,8 +170,6 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
 .ob-email-input:focus { border-color: rgba(255,209,102,0.5); background: rgba(255,209,102,0.04); }
 .ob-email-input::placeholder { color: #4b5563; }
 .ob-trust { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #4b5563; margin-bottom: 24px; }
-.ob-banks { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
-.ob-bank-tag { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 5px 12px; font-size: 11px; color: #6b7280; font-weight: 500; }
 /* Step 3 — Payoff */
 .ob-toggle { display: flex; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 3px; margin-bottom: 24px; width: 100%; max-width: 320px; }
 .ob-toggle-btn { flex: 1; padding: 9px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #6b7280; cursor: pointer; transition: all 0.2s; border: none; background: none; }
@@ -203,6 +200,10 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
 .feature-pill .icon { font-size: 20px; }
 .feature-pill .text strong { display: block; font-size: 13px; font-weight: 600; }
 .feature-pill .text span { font-size: 11px; color: #6b7280; }
+
+/* More card hover */
+.ob-more-card { margin-top:20px; width:100%; max-width:360px; background:rgba(255,209,102,0.04); border:1px solid rgba(255,209,102,0.15); border-radius:12px; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:border-color 0.2s, background 0.2s; }
+.ob-more-card:hover { border-color:rgba(255,209,102,0.45); background:rgba(255,209,102,0.07); }
 
 /* MVP label */
 .mvp-tag { position: fixed; top: 16px; right: 16px; background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.35); color: #a78bfa; padding: 5px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; z-index: 999; }
@@ -266,7 +267,7 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
             <button class="btn btn-ghost" onclick="show('premium')">See Plans</button>
           </div>
           <!-- More card -->
-          <div onclick="obStartFlow()" style="margin-top:20px;width:100%;max-width:360px;background:rgba(255,209,102,0.04);border:1px solid rgba(255,209,102,0.15);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='rgba(255,209,102,0.4)'" onmouseout="this.style.borderColor='rgba(255,209,102,0.15)'">
+          <div class="ob-more-card" onclick="obStartFlow()">
             <div style="text-align:left;">
               <div style="font-size:13px;font-weight:700;color:#f0f2f8;">Activate your APEX experience</div>
               <div style="font-size:11px;color:#6b7280;margin-top:2px;">Set up your card, vault & see your rewards</div>
@@ -346,11 +347,6 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
           <button class="btn btn-gold" onclick="show('dashboard')" style="margin-top:24px;padding:14px 48px;font-size:15px;font-weight:700;">Go to Dashboard →</button>
         </div>
 
-        <!-- placeholder for old content closing tags -->
-        <div style="display:none;">
-          <button class="btn btn-gold" onclick="show('dashboard')" style="padding:14px 32px;font-size:15px;">Get Started</button>
-          <button class="btn btn-ghost" onclick="show('premium')">See Plans</button>
-        </div>
         <div style="font-size:11px;color:#374151;margin-top:16px;">UAE · India · UK · Singapore · USA · Africa</div>
       </div>
     </div>
@@ -951,11 +947,29 @@ function show(name) {
   document.querySelectorAll('.nav-item').forEach(n => {
     if (n.getAttribute('onclick')?.includes("'" + name + "'")) n.classList.add('active');
   });
+  // Reset onboard flow to intro whenever navigating to onboard
+  if (name === 'onboard') obReset();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function setMobileActive(el) {
   document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
+}
+
+// Reset onboard to intro state
+function obReset() {
+  document.querySelectorAll('.ob-steps').forEach(s => s.classList.remove('active'));
+  document.getElementById('ob-intro').classList.add('active');
+  document.getElementById('ob-dots-row').style.display = 'none';
+  // Reset step 3 toggle to Points
+  document.querySelectorAll('.ob-toggle-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.ob-vault-view').forEach(v => v.classList.remove('active'));
+  const pt = document.getElementById('tab-points');
+  const vp = document.getElementById('view-points');
+  if (pt) pt.classList.add('active');
+  if (vp) vp.classList.add('active');
+  // Reset dots
+  document.querySelectorAll('.ob-dot').forEach(d => { d.classList.remove('active'); d.style.background = ''; d.style.width = ''; d.style.borderRadius = ''; });
 }
 
 // Start the 3-step activation flow from intro screen
