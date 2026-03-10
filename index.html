@@ -146,8 +146,55 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
   body { padding-bottom: 70px; }
 }
 
-/* Onboarding screen */
-.onboard-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center; }
+/* Onboarding — multi-step */
+.ob-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 85vh; text-align: center; padding: 32px 20px; }
+.ob-steps { display: none; }
+.ob-steps.active { display: flex; flex-direction: column; align-items: center; width: 100%; animation: fadeIn 0.3s ease; }
+/* Progress dots */
+.ob-dots { display: flex; gap: 8px; margin-bottom: 36px; }
+.ob-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.12); transition: all 0.3s; }
+.ob-dot.active { background: #FFD166; width: 24px; border-radius: 4px; }
+/* Step 1 — Card */
+.ob-card { width: 300px; height: 172px; background: linear-gradient(135deg, #1a1f2e, #252d40); border: 1px solid rgba(255,209,102,0.25); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 32px; position: relative; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,209,102,0.1); }
+.ob-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(255,209,102,0.12) 0%, transparent 70%); }
+.ob-card-logo { font-size: 18px; font-weight: 900; letter-spacing: 0.12em; background: linear-gradient(135deg, #FFD166, #FF9F1C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.ob-card-chip { width: 32px; height: 24px; background: linear-gradient(135deg, #FFD166, #FF9F1C); border-radius: 4px; opacity: 0.85; }
+.ob-card-num { font-size: 13px; letter-spacing: 0.18em; color: rgba(255,255,255,0.5); font-weight: 500; }
+.ob-card-name { font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); font-weight: 600; text-transform: uppercase; }
+.ob-card-badge { position: absolute; top: 18px; right: 20px; font-size: 22px; opacity: 0.6; }
+/* Step 1 text */
+.ob-h1 { font-size: 22px; font-weight: 800; color: #f0f2f8; margin-bottom: 8px; letter-spacing: -0.02em; }
+.ob-sub { font-size: 14px; color: #6b7280; max-width: 300px; line-height: 1.6; margin-bottom: 28px; }
+/* Step 2 — Vault */
+.ob-vault-icon { width: 80px; height: 80px; background: linear-gradient(135deg, rgba(255,209,102,0.15), rgba(255,159,28,0.08)); border: 1px solid rgba(255,209,102,0.25); border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 36px; margin-bottom: 24px; }
+.ob-email-input { width: 100%; max-width: 320px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 14px 16px; font-size: 15px; color: #f0f2f8; font-family: 'Inter', sans-serif; outline: none; transition: border 0.2s; margin-bottom: 12px; }
+.ob-email-input:focus { border-color: rgba(255,209,102,0.5); background: rgba(255,209,102,0.04); }
+.ob-email-input::placeholder { color: #4b5563; }
+.ob-trust { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #4b5563; margin-bottom: 24px; }
+.ob-banks { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
+.ob-bank-tag { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 5px 12px; font-size: 11px; color: #6b7280; font-weight: 500; }
+/* Step 3 — Payoff */
+.ob-toggle { display: flex; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 3px; margin-bottom: 24px; width: 100%; max-width: 320px; }
+.ob-toggle-btn { flex: 1; padding: 9px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #6b7280; cursor: pointer; transition: all 0.2s; border: none; background: none; }
+.ob-toggle-btn.active { background: rgba(255,209,102,0.15); color: #FFD166; }
+.ob-vault-view { display: none; width: 100%; max-width: 360px; }
+.ob-vault-view.active { display: block; animation: fadeIn 0.2s ease; }
+.ob-points-total { font-size: 48px; font-weight: 900; background: linear-gradient(135deg, #FFD166, #FF9F1C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+.ob-points-label { font-size: 12px; color: #6b7280; letter-spacing: 0.1em; margin-bottom: 24px; }
+.ob-card-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; margin-bottom: 8px; }
+.ob-card-row .cr-name { font-size: 13px; font-weight: 600; color: #e8eaf0; }
+.ob-card-row .cr-sub { font-size: 11px; color: #6b7280; margin-top: 2px; }
+.ob-card-row .cr-pts { font-size: 14px; font-weight: 700; color: #FFD166; }
+.ob-perk-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; margin-bottom: 8px; text-align: left; }
+.ob-perk-row .pr-icon { font-size: 22px; }
+.ob-perk-row .pr-name { font-size: 13px; font-weight: 600; color: #e8eaf0; }
+.ob-perk-row .pr-sub { font-size: 11px; color: #6b7280; margin-top: 2px; }
+.ob-perk-row .pr-badge { margin-left: auto; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
+.pr-badge.green { background: rgba(52,211,153,0.15); color: #34d399; }
+.pr-badge.amber { background: rgba(255,209,102,0.15); color: #FFD166; }
+.pr-badge.red { background: rgba(239,68,68,0.15); color: #f87171; }
+/* Legacy (unused but keep to avoid breakage) */
+.onboard-wrap { display: none; }
 .onboard-logo { font-size: 64px; font-weight: 900; letter-spacing: 0.1em; background: linear-gradient(135deg, #FFD166, #FF9F1C, #FFD166); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
 .onboard-tagline { font-size: 18px; color: #9ca3af; max-width: 360px; line-height: 1.6; margin-bottom: 12px; }
 .onboard-stats { display: flex; gap: 32px; margin: 24px 0 32px; }
@@ -196,24 +243,92 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     <div class="mobile-hint">Tap the nav icons below to explore screens ↓</div>
 
     <!-- ════════════════════════════════════════
-         SCREEN: ONBOARD
+         SCREEN: ONBOARD (3-step CRED-style)
     ════════════════════════════════════════ -->
     <div id="s-onboard" class="screen">
-      <div class="onboard-wrap">
-        <div style="font-size:48px;margin-bottom:16px;">✈️</div>
-        <div class="onboard-logo">APEX</div>
-        <div style="font-size:11px;letter-spacing:0.15em;color:#6b7280;margin-bottom:16px;font-weight:600;">MAXIMIZE EVERY POINT · GLOBALLY</div>
-        <div class="onboard-tagline">Your credit cards are hiding a fortune. <span style="color:#FFD166;font-weight:600;">APEX finds it, values it, and puts it to work.</span></div>
-        <div class="onboard-stats">
-          <div class="onboard-stat"><div class="val">₹2.3T</div><div class="lbl">POINTS UNREDEEMED<br>GLOBALLY / YEAR</div></div>
-          <div class="onboard-stat"><div class="val">47M</div><div class="lbl">CARDHOLDERS<br>MISSING OUT</div></div>
-          <div class="onboard-stat"><div class="val">3.2x</div><div class="lbl">AVERAGE VALUE<br>UNLOCKED</div></div>
+      <div class="ob-wrap">
+
+        <!-- Progress dots -->
+        <div class="ob-dots">
+          <div class="ob-dot active" id="dot-1"></div>
+          <div class="ob-dot" id="dot-2"></div>
+          <div class="ob-dot" id="dot-3"></div>
         </div>
-        <div class="feature-pill"><span class="icon">💳</span><div class="text"><strong>All Cards in One Place</strong><span>Bills, points, scores — unified dashboard</span></div></div>
-        <div class="feature-pill"><span class="icon">🧠</span><div class="text"><strong>AI Points Optimizer</strong><span>Best airline, best ratio, best timing</span></div></div>
-        <div class="feature-pill"><span class="icon">🛒</span><div class="text"><strong>Miles Marketplace</strong><span>Buy, sell, gift — earn commission</span></div></div>
-        <div class="feature-pill"><span class="icon">🛋️</span><div class="text"><strong>Universal Lounge Access</strong><span>Priority Pass, Dreamfolks, Centurion & more</span></div></div>
-        <div style="margin-top:28px;display:flex;gap:12px;">
+
+        <!-- ── STEP 1: Card Activation ── -->
+        <div class="ob-steps active" id="ob-step-1">
+          <div class="ob-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div class="ob-card-logo">APEX</div>
+              <div class="ob-card-chip"></div>
+            </div>
+            <div>
+              <div class="ob-card-num">•••• •••• •••• 4291</div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+                <div class="ob-card-name">Your Name</div>
+                <div style="font-size:13px;font-weight:700;color:rgba(255,209,102,0.7);letter-spacing:0.05em;">VISA</div>
+              </div>
+            </div>
+            <div style="position:absolute;bottom:16px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;">⬡</div>
+          </div>
+          <div class="ob-h1">Your APEX card is ready.</div>
+          <div class="ob-sub">Activate it to start earning points on every spend — flights, hotels, dining, everything.</div>
+          <button class="btn btn-gold" onclick="obNext(2)" style="padding:14px 48px;font-size:15px;font-weight:700;letter-spacing:0.02em;">Activate My Card →</button>
+          <div style="margin-top:16px;font-size:12px;color:#374151;cursor:pointer;" onclick="show('dashboard')">Skip for now</div>
+        </div>
+
+        <!-- ── STEP 2: APEX Vault (email) ── -->
+        <div class="ob-steps" id="ob-step-2">
+          <div class="ob-vault-icon">🔐</div>
+          <div class="ob-h1">Turn on APEX Vault</div>
+          <div class="ob-sub">We'll track your rewards, statement credits, and travel perks — automatically, across all your banks.</div>
+          <div class="ob-banks">
+            <span class="ob-bank-tag">HDFC</span>
+            <span class="ob-bank-tag">Amex</span>
+            <span class="ob-bank-tag">Axis</span>
+            <span class="ob-bank-tag">ICICI</span>
+            <span class="ob-bank-tag">IndusInd</span>
+            <span class="ob-bank-tag">Diners</span>
+          </div>
+          <input class="ob-email-input" type="email" placeholder="Enter your email address" id="ob-email" />
+          <div class="ob-trust">🔒 <span>Your email is only used to read bank statements. We never store passwords.</span></div>
+          <button class="btn btn-gold" onclick="obNext(3)" style="padding:14px 48px;font-size:15px;font-weight:700;">Activate Vault →</button>
+          <div style="margin-top:16px;font-size:12px;color:#374151;cursor:pointer;" onclick="obNext(3)">I'll connect later</div>
+        </div>
+
+        <!-- ── STEP 3: Payoff — Points / Perks toggle ── -->
+        <div class="ob-steps" id="ob-step-3">
+          <div class="ob-h1" style="margin-bottom:6px;">Welcome to your Vault.</div>
+          <div class="ob-sub" style="margin-bottom:20px;">Here's everything we found across your cards.</div>
+
+          <div class="ob-toggle">
+            <button class="ob-toggle-btn active" id="tab-points" onclick="obTab('points')">Points Earned</button>
+            <button class="ob-toggle-btn" id="tab-perks" onclick="obTab('perks')">Perks Available</button>
+          </div>
+
+          <!-- Points view -->
+          <div class="ob-vault-view active" id="view-points">
+            <div class="ob-points-total">2,84,710</div>
+            <div class="ob-points-label">TOTAL POINTS · ACROSS ALL CARDS</div>
+            <div class="ob-card-row"><div><div class="cr-name">HDFC Infinia</div><div class="cr-sub">Reward points</div></div><div class="cr-pts">1,42,800</div></div>
+            <div class="ob-card-row"><div><div class="cr-name">Amex Platinum Travel</div><div class="cr-sub">Membership Rewards</div></div><div class="cr-pts">78,400</div></div>
+            <div class="ob-card-row"><div><div class="cr-name">Axis Reserve</div><div class="cr-sub">EDGE Rewards</div></div><div class="cr-pts">41,200</div></div>
+            <div class="ob-card-row"><div><div class="cr-name">Diners Black</div><div class="cr-sub">Reward points</div></div><div class="cr-pts">22,310</div></div>
+          </div>
+
+          <!-- Perks view -->
+          <div class="ob-vault-view" id="view-perks">
+            <div class="ob-perk-row"><div class="pr-icon">🛋️</div><div><div class="pr-name">Lounge Visits</div><div class="pr-sub">Remaining this quarter</div></div><div class="pr-badge green">8 left</div></div>
+            <div class="ob-perk-row"><div class="pr-icon">✈️</div><div><div class="pr-name">Vistara Travel Credit</div><div class="pr-sub">Expires Jun 2026</div></div><div class="pr-badge amber">₹5,000</div></div>
+            <div class="ob-perk-row"><div class="pr-icon">🏨</div><div><div class="pr-name">Hotel Night Credit</div><div class="pr-sub">Marriott Bonvoy · Amex</div></div><div class="pr-badge green">1 night</div></div>
+            <div class="ob-perk-row"><div class="pr-icon">⚡</div><div><div class="pr-name">Points Expiring Soon</div><div class="pr-sub">HDFC Infinia · Mar 31</div></div><div class="pr-badge red">42,000 pts</div></div>
+          </div>
+
+          <button class="btn btn-gold" onclick="show('dashboard')" style="margin-top:24px;padding:14px 48px;font-size:15px;font-weight:700;">Go to Dashboard →</button>
+        </div>
+
+        <!-- placeholder for old content closing tags -->
+        <div style="display:none;">
           <button class="btn btn-gold" onclick="show('dashboard')" style="padding:14px 32px;font-size:15px;">Get Started</button>
           <button class="btn btn-ghost" onclick="show('premium')">See Plans</button>
         </div>
@@ -823,6 +938,33 @@ function setMobileActive(el) {
   document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
 }
+
+// Onboarding step navigation
+function obNext(step) {
+  document.querySelectorAll('.ob-steps').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.ob-dot').forEach(d => d.classList.remove('active'));
+  const target = document.getElementById('ob-step-' + step);
+  const dot = document.getElementById('dot-' + step);
+  if (target) target.classList.add('active');
+  if (dot) dot.classList.add('active');
+  // fill in dots up to current step
+  for (let i = 1; i < step; i++) {
+    const d = document.getElementById('dot-' + i);
+    if (d) { d.classList.add('active'); d.style.background = 'rgba(255,209,102,0.4)'; d.style.width = '8px'; d.style.borderRadius = '50%'; }
+  }
+  const curDot = document.getElementById('dot-' + step);
+  if (curDot) { curDot.style.background = '#FFD166'; curDot.style.width = '24px'; curDot.style.borderRadius = '4px'; }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Points / Perks toggle on step 3
+function obTab(tab) {
+  document.querySelectorAll('.ob-toggle-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.ob-vault-view').forEach(v => v.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('view-' + tab).classList.add('active');
+}
+
 // Show onboard first
 show('onboard');
 document.querySelectorAll('.nav-item').forEach(n => {
