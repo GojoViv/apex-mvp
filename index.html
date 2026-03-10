@@ -201,6 +201,35 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
 .feature-pill .text strong { display: block; font-size: 13px; font-weight: 600; }
 .feature-pill .text span { font-size: 11px; color: #6b7280; }
 
+/* CRED Card Stack */
+.cred-stack { position:relative; width:100%; max-width:400px; margin:0 auto; height:220px; }
+.cred-card { position:absolute; width:100%; cursor:pointer; transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease; transform:translateY(calc(var(--idx) * 14px)) scale(calc(1 - var(--idx) * 0.035)); z-index:calc(10 - var(--idx)); }
+.cred-card:hover { transform:translateY(calc(var(--idx) * 14px - 4px)) scale(calc(1 - var(--idx) * 0.035)); }
+.cred-card.active { transform:translateY(-12px) scale(1.02) !important; z-index:20 !important; }
+.cred-card.pushed { transform:translateY(calc(var(--idx) * 18px + 30px)) scale(calc(1 - var(--idx) * 0.04)) !important; }
+.cred-card-inner { border-radius:18px; padding:22px 24px 18px; height:190px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.08); box-shadow:0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04); }
+.cc-shine { position:absolute; top:-60px; right:-40px; width:200px; height:200px; background:radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 65%); pointer-events:none; }
+.cc-top-row { display:flex; justify-content:space-between; align-items:flex-start; }
+.cc-bank-name { font-size:13px; font-weight:800; letter-spacing:0.1em; }
+.cc-network { font-size:16px; font-weight:900; color:rgba(255,255,255,0.5); text-align:right; letter-spacing:0.05em; line-height:1.2; }
+.cc-chip-row { display:flex; align-items:center; gap:10px; }
+.cc-chip { width:34px; height:26px; background:linear-gradient(135deg,#FFD166,#FF9F1C); border-radius:5px; opacity:0.9; position:relative; }
+.cc-chip::after { content:''; position:absolute; top:50%; left:0; right:0; height:1px; background:rgba(0,0,0,0.2); }
+.cc-chip::before { content:''; position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(0,0,0,0.2); }
+.cc-nfc { font-size:20px; color:rgba(255,255,255,0.3); }
+.cc-number { font-size:14px; letter-spacing:0.2em; color:rgba(255,255,255,0.55); font-weight:500; }
+.cc-bottom-row { display:flex; align-items:flex-end; gap:16px; }
+.cc-label-sm { font-size:8px; color:rgba(255,255,255,0.35); letter-spacing:0.1em; margin-bottom:2px; }
+.cc-value-sm { font-size:12px; font-weight:600; color:rgba(255,255,255,0.7); letter-spacing:0.05em; }
+.cc-points-pill { margin-left:auto; background:rgba(255,209,102,0.18); border:1px solid rgba(255,209,102,0.35); color:#FFD166; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; white-space:nowrap; }
+/* Detail panel */
+.card-detail-panel { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px; }
+.cd-row { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+.cd-row:last-of-type { border-bottom:none; }
+.cd-key { font-size:12px; color:#6b7280; }
+.cd-val { font-size:12px; font-weight:600; color:#e8eaf0; text-align:right; max-width:55%; }
+.cd-actions { display:flex; gap:8px; margin-top:16px; }
+
 /* Deals Scout */
 .deals-filter { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
 .deals-filter-btn { padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.03); color:#6b7280; cursor:pointer; transition:all 0.15s; }
@@ -464,73 +493,204 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     </div>
 
     <!-- ════════════════════════════════════════
-         SCREEN: CARDS & POINTS
+         SCREEN: CARDS & POINTS (CRED stack)
     ════════════════════════════════════════ -->
     <div id="s-cards" class="screen">
-      <div class="page-title">My Cards & Points</div>
-      <div class="page-sub">341,200 total points across 4 cards · Est. value ₹1,24,580</div>
-      <button class="btn btn-gold" style="margin-bottom:20px;">+ Add Card</button>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+        <div class="page-title" style="margin-bottom:0;">My Cards</div>
+        <button class="btn btn-ghost" style="padding:7px 14px;font-size:12px;">+ Add Card</button>
+      </div>
+      <div class="page-sub" style="margin-bottom:28px;">341,200 pts across 4 cards · Est. ₹1,24,580</div>
 
-      <div class="grid-2">
-        <div class="cc-card" style="background:linear-gradient(135deg,#1c1f35,#0a0e1a);border-color:rgba(255,209,102,0.3);">
-          <div class="cc-bank" style="color:#FFD166;">HDFC INFINIA</div>
-          <div class="cc-points">1,42,800</div>
-          <div class="cc-label">Reward Points</div>
-          <div class="cc-value">≈ ₹71,400 · Best: KrisFlyer 1:1</div>
-          <div class="cc-expiry">Expires: Dec 2026</div>
-          <div style="margin-top:10px;"><span class="badge badge-gold">PREMIUM</span></div>
+      <!-- Card Stack -->
+      <div class="cred-stack" id="card-stack">
+
+        <!-- HDFC Infinia -->
+        <div class="cred-card" id="cc-0" onclick="selectCard(0)" style="--idx:0;--total:4;">
+          <div class="cred-card-inner" style="background:linear-gradient(135deg,#0f1629 0%,#1a2545 50%,#0d1020 100%);">
+            <div class="cc-shine"></div>
+            <div class="cc-top-row">
+              <div class="cc-bank-name" style="color:#FFD166;">HDFC INFINIA</div>
+              <div class="cc-network">VISA<br><span style="font-size:8px;opacity:0.6;">INFINITE</span></div>
+            </div>
+            <div class="cc-chip-row">
+              <div class="cc-chip"></div>
+              <div class="cc-nfc">◎</div>
+            </div>
+            <div class="cc-number">•••• •••• •••• 4291</div>
+            <div class="cc-bottom-row">
+              <div><div class="cc-label-sm">CARD HOLDER</div><div class="cc-value-sm">RAHUL SHARMA</div></div>
+              <div><div class="cc-label-sm">VALID THRU</div><div class="cc-value-sm">12/27</div></div>
+              <div class="cc-points-pill">1,42,800 pts</div>
+            </div>
+          </div>
         </div>
-        <div class="cc-card" style="background:linear-gradient(135deg,#1a1a35,#0a0a1a);border-color:rgba(167,139,250,0.3);">
-          <div class="cc-bank" style="color:#a78bfa;">AMEX PLATINUM</div>
-          <div class="cc-points">98,500</div>
-          <div class="cc-label">Membership Rewards</div>
-          <div class="cc-value">≈ ₹29,550 · Best: BA Avios 1:1</div>
-          <div class="cc-expiry">No Expiry</div>
-          <div style="margin-top:10px;"><span class="badge badge-purple">MR POINTS</span></div>
+
+        <!-- Amex Platinum -->
+        <div class="cred-card" id="cc-1" onclick="selectCard(1)" style="--idx:1;--total:4;">
+          <div class="cred-card-inner" style="background:linear-gradient(135deg,#1a0a2e 0%,#2d1854 50%,#0f0a1a 100%);">
+            <div class="cc-shine"></div>
+            <div class="cc-top-row">
+              <div class="cc-bank-name" style="color:#c4b5fd;">AMERICAN EXPRESS</div>
+              <div class="cc-network" style="font-size:14px;font-weight:900;color:#c4b5fd;">AMEX</div>
+            </div>
+            <div class="cc-chip-row">
+              <div class="cc-chip" style="background:linear-gradient(135deg,#c4b5fd,#7c3aed);"></div>
+              <div class="cc-nfc" style="color:#c4b5fd;">◎</div>
+            </div>
+            <div class="cc-number">•••• •••••• 41008</div>
+            <div class="cc-bottom-row">
+              <div><div class="cc-label-sm">CARD HOLDER</div><div class="cc-value-sm">RAHUL SHARMA</div></div>
+              <div><div class="cc-label-sm">VALID THRU</div><div class="cc-value-sm">09/28</div></div>
+              <div class="cc-points-pill" style="background:rgba(196,181,253,0.15);color:#c4b5fd;border-color:rgba(196,181,253,0.3);">98,500 MR</div>
+            </div>
+          </div>
         </div>
-        <div class="cc-card" style="background:linear-gradient(135deg,#1a1c20,#0d0f14);border-color:rgba(248,113,113,0.25);">
-          <div class="cc-bank" style="color:#f87171;">AXIS MAGNUS</div>
-          <div class="cc-points">28,000</div>
-          <div class="cc-label">Edge Reward Points</div>
-          <div class="cc-value">≈ ₹14,000 · ⚠️ Expiring 45 days</div>
-          <div class="cc-expiry" style="color:#f87171;">⚠️ Apr 20, 2026</div>
-          <div style="margin-top:10px;"><span class="badge badge-red">EXPIRING SOON</span></div>
+
+        <!-- Axis Magnus -->
+        <div class="cred-card" id="cc-2" onclick="selectCard(2)" style="--idx:2;--total:4;">
+          <div class="cred-card-inner" style="background:linear-gradient(135deg,#1a0808 0%,#2a1010 50%,#0f0a0a 100%);">
+            <div class="cc-shine"></div>
+            <div class="cc-top-row">
+              <div class="cc-bank-name" style="color:#f87171;">AXIS MAGNUS</div>
+              <div class="cc-network" style="color:#f87171;">VISA<br><span style="font-size:8px;opacity:0.6;">SIGNATURE</span></div>
+            </div>
+            <div class="cc-chip-row">
+              <div class="cc-chip" style="background:linear-gradient(135deg,#f87171,#991b1b);"></div>
+              <div class="cc-nfc" style="color:#f87171;">◎</div>
+            </div>
+            <div class="cc-number">•••• •••• •••• 8847</div>
+            <div class="cc-bottom-row">
+              <div><div class="cc-label-sm">CARD HOLDER</div><div class="cc-value-sm">RAHUL SHARMA</div></div>
+              <div><div class="cc-label-sm">VALID THRU</div><div class="cc-value-sm">06/26</div></div>
+              <div class="cc-points-pill" style="background:rgba(248,113,113,0.15);color:#f87171;border-color:rgba(248,113,113,0.35);">⚠ 28,000 pts</div>
+            </div>
+          </div>
         </div>
-        <div class="cc-card" style="background:linear-gradient(135deg,#1a1c1a,#0d0f0d);border-color:rgba(74,222,128,0.2);">
-          <div class="cc-bank" style="color:#4ade80;">SBI ELITE</div>
-          <div class="cc-points">71,900</div>
-          <div class="cc-label">Reward Points</div>
-          <div class="cc-value">≈ ₹9,630 · Best: Air India FFR</div>
-          <div class="cc-expiry">Expires: Sep 2026</div>
-          <div style="margin-top:10px;"><span class="badge badge-green">ACTIVE</span></div>
+
+        <!-- SBI Elite -->
+        <div class="cred-card" id="cc-3" onclick="selectCard(3)" style="--idx:3;--total:4;">
+          <div class="cred-card-inner" style="background:linear-gradient(135deg,#071a10 0%,#0f2d1a 50%,#050f08 100%);">
+            <div class="cc-shine"></div>
+            <div class="cc-top-row">
+              <div class="cc-bank-name" style="color:#4ade80;">SBI ELITE</div>
+              <div class="cc-network" style="color:#4ade80;">VISA<br><span style="font-size:8px;opacity:0.6;">ELITE</span></div>
+            </div>
+            <div class="cc-chip-row">
+              <div class="cc-chip" style="background:linear-gradient(135deg,#4ade80,#166534);"></div>
+              <div class="cc-nfc" style="color:#4ade80;">◎</div>
+            </div>
+            <div class="cc-number">•••• •••• •••• 3319</div>
+            <div class="cc-bottom-row">
+              <div><div class="cc-label-sm">CARD HOLDER</div><div class="cc-value-sm">RAHUL SHARMA</div></div>
+              <div><div class="cc-label-sm">VALID THRU</div><div class="cc-value-sm">03/27</div></div>
+              <div class="cc-points-pill" style="background:rgba(74,222,128,0.12);color:#4ade80;border-color:rgba(74,222,128,0.25);">71,900 pts</div>
+            </div>
+          </div>
         </div>
+
       </div>
 
-      <div class="section-title">📊 SPEND BREAKDOWN THIS MONTH</div>
-      <div class="card">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <div>
-            <div class="stat-label">TOTAL SPEND</div>
-            <div style="font-size:24px;font-weight:800;">₹66,570</div>
-            <div style="font-size:12px;color:#6b7280;margin-top:4px;">Across 4 cards this month</div>
+      <!-- Tap hint -->
+      <div id="card-hint" style="text-align:center;font-size:12px;color:#374151;margin-top:16px;margin-bottom:8px;">Tap any card to see details</div>
+
+      <!-- Card Detail Panel (hidden until card selected) -->
+      <div id="card-detail" style="display:none;animation:fadeIn 0.25s ease;">
+
+        <!-- HDFC Infinia details -->
+        <div class="card-detail-panel" id="cd-0">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+            <div>
+              <div style="font-size:22px;font-weight:900;color:#FFD166;">1,42,800</div>
+              <div style="font-size:11px;color:#6b7280;letter-spacing:0.08em;margin-top:2px;">REWARD POINTS · ≈ ₹71,400</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:13px;font-weight:700;color:#f0f2f8;">₹34,820 due</div>
+              <div style="font-size:11px;color:#f87171;margin-top:2px;">⏰ Due in 3 days</div>
+            </div>
           </div>
-          <div>
-            <div class="stat-label">POINTS EARNED</div>
-            <div style="font-size:24px;font-weight:800;color:#FFD166;">+94,220</div>
-            <div style="font-size:12px;color:#6b7280;margin-top:4px;">Est. ₹47,110 value</div>
+          <div class="cd-row"><span class="cd-key">Best redemption</span><span class="cd-val" style="color:#34d399;">KrisFlyer 1:1 — ₹71,400 value</span></div>
+          <div class="cd-row"><span class="cd-key">Spent this month</span><span class="cd-val">₹34,820</span></div>
+          <div class="cd-row"><span class="cd-key">Points this month</span><span class="cd-val" style="color:#FFD166;">+34,820 pts</span></div>
+          <div class="cd-row"><span class="cd-key">Lounge access</span><span class="cd-val">Unlimited · Priority Pass</span></div>
+          <div class="cd-row"><span class="cd-key">Points expiry</span><span class="cd-val">Dec 2027</span></div>
+          <div class="cd-actions">
+            <button class="btn btn-gold" style="flex:1;padding:10px;font-size:13px;">Pay Bill →</button>
+            <button class="btn btn-ghost" onclick="show('transfer')" style="flex:1;padding:10px;font-size:13px;">Transfer Miles</button>
+            <button class="btn btn-ghost" onclick="show('optimize')" style="flex:1;padding:10px;font-size:13px;">Optimize</button>
           </div>
         </div>
-        <div style="margin-top:16px;">
-          <div style="font-size:11px;color:#4b5563;margin-bottom:8px;">CATEGORY BREAKDOWN</div>
-          {[['Travel','35%','#60a5fa'],['Dining','22%','#4ade80'],['Shopping','18%','#FFD166'],['Fuel','12%','#f97316'],['Others','13%','#6b7280']].map(([c,p])=>'')}
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Travel</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:35%;background:#60a5fa;"></div></div><span style="font-size:12px;color:#60a5fa;width:30px;text-align:right;">35%</span></div>
-            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Dining</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:22%;background:#4ade80;"></div></div><span style="font-size:12px;color:#4ade80;width:30px;text-align:right;">22%</span></div>
-            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Shopping</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:18%;background:#FFD166;"></div></div><span style="font-size:12px;color:#FFD166;width:30px;text-align:right;">18%</span></div>
-            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Fuel</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:12%;background:#f97316;"></div></div><span style="font-size:12px;color:#f97316;width:30px;text-align:right;">12%</span></div>
-            <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;color:#9ca3af;width:70px;">Others</span><div class="prog-bar" style="flex:1;"><div class="prog-fill" style="width:13%;background:#6b7280;"></div></div><span style="font-size:12px;color:#6b7280;width:30px;text-align:right;">13%</span></div>
+
+        <!-- Amex details -->
+        <div class="card-detail-panel" id="cd-1" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+            <div>
+              <div style="font-size:22px;font-weight:900;color:#c4b5fd;">98,500</div>
+              <div style="font-size:11px;color:#6b7280;letter-spacing:0.08em;margin-top:2px;">MEMBERSHIP REWARDS · ≈ ₹29,550</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:13px;font-weight:700;color:#f0f2f8;">₹18,450 due</div>
+              <div style="font-size:11px;color:#fbbf24;margin-top:2px;">Due Mar 14</div>
+            </div>
+          </div>
+          <div class="cd-row"><span class="cd-key">Best redemption</span><span class="cd-val" style="color:#34d399;">BA Avios 1:1 — +25% bonus until Mar 31</span></div>
+          <div class="cd-row"><span class="cd-key">Spent this month</span><span class="cd-val">₹18,450</span></div>
+          <div class="cd-row"><span class="cd-key">Points this month</span><span class="cd-val" style="color:#c4b5fd;">+36,900 MR</span></div>
+          <div class="cd-row"><span class="cd-key">Hotel status</span><span class="cd-val">Marriott Gold · Hilton Gold</span></div>
+          <div class="cd-row"><span class="cd-key">Points expiry</span><span class="cd-val" style="color:#34d399;">No expiry</span></div>
+          <div class="cd-actions">
+            <button class="btn btn-gold" style="flex:1;padding:10px;font-size:13px;">Pay Bill →</button>
+            <button class="btn btn-ghost" onclick="show('transfer')" style="flex:1;padding:10px;font-size:13px;">Transfer MR</button>
+            <button class="btn btn-ghost" onclick="show('deals')" style="flex:1;padding:10px;font-size:13px;">Live Deals</button>
           </div>
         </div>
+
+        <!-- Axis Magnus details -->
+        <div class="card-detail-panel" id="cd-2" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+            <div>
+              <div style="font-size:22px;font-weight:900;color:#f87171;">28,000</div>
+              <div style="font-size:11px;color:#6b7280;letter-spacing:0.08em;margin-top:2px;">EDGE POINTS · ≈ ₹14,000 · ⚠️ EXPIRING</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:13px;font-weight:700;color:#f0f2f8;">₹9,200 due</div>
+              <div style="font-size:11px;color:#6b7280;margin-top:2px;">Due Mar 22</div>
+            </div>
+          </div>
+          <div class="cd-row" style="background:rgba(248,113,113,0.06);border-radius:8px;padding:8px 10px;"><span class="cd-key" style="color:#f87171;">⚠️ Expiring Apr 20</span><span class="cd-val" style="color:#f87171;font-weight:700;">45 days left — act now</span></div>
+          <div class="cd-row"><span class="cd-key">Best redemption</span><span class="cd-val" style="color:#34d399;">Emirates Skywards — Dubai RTN in economy</span></div>
+          <div class="cd-row"><span class="cd-key">Spent this month</span><span class="cd-val">₹9,200</span></div>
+          <div class="cd-row"><span class="cd-key">Earn rate</span><span class="cd-val">12 EDGE pts per ₹200 spend</span></div>
+          <div class="cd-actions">
+            <button class="btn btn-gold" onclick="show('transfer')" style="flex:1;padding:10px;font-size:13px;">Transfer Now →</button>
+            <button class="btn btn-ghost" style="flex:1;padding:10px;font-size:13px;">Pay Bill</button>
+          </div>
+        </div>
+
+        <!-- SBI Elite details -->
+        <div class="card-detail-panel" id="cd-3" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+            <div>
+              <div style="font-size:22px;font-weight:900;color:#4ade80;">71,900</div>
+              <div style="font-size:11px;color:#6b7280;letter-spacing:0.08em;margin-top:2px;">REWARD POINTS · ≈ ₹9,630</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:13px;font-weight:700;color:#f0f2f8;">₹4,100 due</div>
+              <div style="font-size:11px;color:#6b7280;margin-top:2px;">Due Mar 28</div>
+            </div>
+          </div>
+          <div class="cd-row"><span class="cd-key">Best redemption</span><span class="cd-val" style="color:#34d399;">Air India FFR — domestic travel</span></div>
+          <div class="cd-row"><span class="cd-key">Spent this month</span><span class="cd-val">₹4,100</span></div>
+          <div class="cd-row"><span class="cd-key">Points this month</span><span class="cd-val" style="color:#4ade80;">+4,100 pts</span></div>
+          <div class="cd-row"><span class="cd-key">Lounge access</span><span class="cd-val">8 visits/year · Dreamfolks</span></div>
+          <div class="cd-row"><span class="cd-key">Points expiry</span><span class="cd-val">Sep 2026</span></div>
+          <div class="cd-actions">
+            <button class="btn btn-gold" style="flex:1;padding:10px;font-size:13px;">Pay Bill →</button>
+            <button class="btn btn-ghost" onclick="show('transfer')" style="flex:1;padding:10px;font-size:13px;">Transfer Miles</button>
+            <button class="btn btn-ghost" onclick="show('optimize')" style="flex:1;padding:10px;font-size:13px;">Optimize</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1095,6 +1255,37 @@ function show(name) {
 function setMobileActive(el) {
   document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
+}
+
+// CRED card stack
+let activeCard = null;
+function selectCard(idx) {
+  const cards = document.querySelectorAll('.cred-card');
+  const panels = document.querySelectorAll('.card-detail-panel');
+  const detail = document.getElementById('card-detail');
+  const hint = document.getElementById('card-hint');
+  const stack = document.getElementById('card-stack');
+
+  if (activeCard === idx) {
+    // Deselect — collapse back
+    cards.forEach((c, i) => { c.classList.remove('active','pushed'); });
+    detail.style.display = 'none';
+    hint.style.display = 'block';
+    stack.style.height = '220px';
+    activeCard = null;
+    return;
+  }
+  activeCard = idx;
+  cards.forEach((c, i) => {
+    c.classList.remove('active','pushed');
+    if (i === idx) c.classList.add('active');
+    else c.classList.add('pushed');
+  });
+  panels.forEach((p, i) => p.style.display = i === idx ? 'block' : 'none');
+  detail.style.display = 'block';
+  hint.textContent = 'Tap card again to collapse';
+  hint.style.color = '#4b5563';
+  stack.style.height = '200px';
 }
 
 // Deals filter
