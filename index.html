@@ -193,8 +193,6 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
 .pr-badge.green { background: rgba(52,211,153,0.15); color: #34d399; }
 .pr-badge.amber { background: rgba(255,209,102,0.15); color: #FFD166; }
 .pr-badge.red { background: rgba(239,68,68,0.15); color: #f87171; }
-/* Legacy (unused but keep to avoid breakage) */
-.onboard-wrap { display: none; }
 .onboard-logo { font-size: 64px; font-weight: 900; letter-spacing: 0.1em; background: linear-gradient(135deg, #FFD166, #FF9F1C, #FFD166); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
 .onboard-tagline { font-size: 18px; color: #9ca3af; max-width: 360px; line-height: 1.6; margin-bottom: 12px; }
 .onboard-stats { display: flex; gap: 32px; margin: 24px 0 32px; }
@@ -243,20 +241,49 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     <div class="mobile-hint">Tap the nav icons below to explore screens ↓</div>
 
     <!-- ════════════════════════════════════════
-         SCREEN: ONBOARD (3-step CRED-style)
+         SCREEN: ONBOARD (intro + 3-step flow)
     ════════════════════════════════════════ -->
     <div id="s-onboard" class="screen">
       <div class="ob-wrap">
 
-        <!-- Progress dots -->
-        <div class="ob-dots">
+        <!-- ── INTRO (default view) ── -->
+        <div class="ob-steps active" id="ob-intro">
+          <div style="font-size:48px;margin-bottom:16px;">✈️</div>
+          <div class="onboard-logo">APEX</div>
+          <div style="font-size:11px;letter-spacing:0.15em;color:#6b7280;margin-bottom:16px;font-weight:600;">MAXIMIZE EVERY POINT · GLOBALLY</div>
+          <div class="onboard-tagline">Your credit cards are hiding a fortune. <span style="color:#FFD166;font-weight:600;">APEX finds it, values it, and puts it to work.</span></div>
+          <div class="onboard-stats">
+            <div class="onboard-stat"><div class="val">₹2.3T</div><div class="lbl">POINTS UNREDEEMED<br>GLOBALLY / YEAR</div></div>
+            <div class="onboard-stat"><div class="val">47M</div><div class="lbl">CARDHOLDERS<br>MISSING OUT</div></div>
+            <div class="onboard-stat"><div class="val">3.2x</div><div class="lbl">AVERAGE VALUE<br>UNLOCKED</div></div>
+          </div>
+          <div class="feature-pill"><span class="icon">💳</span><div class="text"><strong>All Cards in One Place</strong><span>Bills, points, scores — unified dashboard</span></div></div>
+          <div class="feature-pill"><span class="icon">🧠</span><div class="text"><strong>AI Points Optimizer</strong><span>Best airline, best ratio, best timing</span></div></div>
+          <div class="feature-pill"><span class="icon">🛒</span><div class="text"><strong>Miles Marketplace</strong><span>Buy, sell, gift — earn commission</span></div></div>
+          <div class="feature-pill"><span class="icon">🛋️</span><div class="text"><strong>Universal Lounge Access</strong><span>Priority Pass, Dreamfolks, Centurion & more</span></div></div>
+          <div style="margin-top:28px;display:flex;gap:12px;">
+            <button class="btn btn-gold" onclick="show('dashboard')" style="padding:14px 32px;font-size:15px;">Get Started</button>
+            <button class="btn btn-ghost" onclick="show('premium')">See Plans</button>
+          </div>
+          <!-- More card -->
+          <div onclick="obStartFlow()" style="margin-top:20px;width:100%;max-width:360px;background:rgba(255,209,102,0.04);border:1px solid rgba(255,209,102,0.15);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='rgba(255,209,102,0.4)'" onmouseout="this.style.borderColor='rgba(255,209,102,0.15)'">
+            <div style="text-align:left;">
+              <div style="font-size:13px;font-weight:700;color:#f0f2f8;">Activate your APEX experience</div>
+              <div style="font-size:11px;color:#6b7280;margin-top:2px;">Set up your card, vault & see your rewards</div>
+            </div>
+            <div style="font-size:18px;color:#FFD166;margin-left:12px;">→</div>
+          </div>
+        </div>
+
+        <!-- Progress dots (shown during 3-step flow) -->
+        <div class="ob-dots" id="ob-dots-row" style="display:none;">
           <div class="ob-dot active" id="dot-1"></div>
           <div class="ob-dot" id="dot-2"></div>
           <div class="ob-dot" id="dot-3"></div>
         </div>
 
         <!-- ── STEP 1: Card Activation ── -->
-        <div class="ob-steps active" id="ob-step-1">
+        <div class="ob-steps" id="ob-step-1">
           <div class="ob-card">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;">
               <div class="ob-card-logo">APEX</div>
@@ -929,6 +956,12 @@ function show(name) {
 function setMobileActive(el) {
   document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
+}
+
+// Start the 3-step activation flow from intro screen
+function obStartFlow() {
+  document.getElementById('ob-dots-row').style.display = 'flex';
+  obNext(1);
 }
 
 // Onboarding step navigation
