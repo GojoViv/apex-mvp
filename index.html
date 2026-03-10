@@ -201,6 +201,30 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
 .feature-pill .text strong { display: block; font-size: 13px; font-weight: 600; }
 .feature-pill .text span { font-size: 11px; color: #6b7280; }
 
+/* Deals Scout */
+.deals-filter { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+.deals-filter-btn { padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.03); color:#6b7280; cursor:pointer; transition:all 0.15s; }
+.deals-filter-btn.active { background:rgba(255,209,102,0.12); border-color:rgba(255,209,102,0.35); color:#FFD166; }
+.deal-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:18px; margin-bottom:12px; position:relative; overflow:hidden; transition:border-color 0.2s; }
+.deal-card:hover { border-color:rgba(255,209,102,0.25); }
+.deal-card.hot { border-color:rgba(248,113,113,0.25); background:rgba(248,113,113,0.03); }
+.deal-card.hot::before { content:'🔥 HOT'; position:absolute; top:14px; right:14px; font-size:10px; font-weight:800; color:#f87171; background:rgba(248,113,113,0.15); border:1px solid rgba(248,113,113,0.25); padding:3px 8px; border-radius:6px; letter-spacing:0.05em; }
+.deal-card.new::before { content:'NEW'; position:absolute; top:14px; right:14px; font-size:10px; font-weight:800; color:#34d399; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.2); padding:3px 8px; border-radius:6px; letter-spacing:0.05em; }
+.deal-airline { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.deal-airline-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+.deal-airline-name { font-size:13px; font-weight:700; color:#e8eaf0; }
+.deal-airline-type { font-size:11px; color:#6b7280; margin-top:1px; }
+.deal-headline { font-size:16px; font-weight:800; color:#f0f2f8; margin-bottom:6px; letter-spacing:-0.01em; }
+.deal-desc { font-size:13px; color:#9ca3af; line-height:1.5; margin-bottom:12px; }
+.deal-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.deal-tag { font-size:11px; font-weight:600; padding:3px 10px; border-radius:6px; }
+.deal-tag.expiry { background:rgba(251,191,36,0.1); color:#fbbf24; border:1px solid rgba(251,191,36,0.2); }
+.deal-tag.card { background:rgba(167,139,250,0.1); color:#a78bfa; border:1px solid rgba(167,139,250,0.2); }
+.deal-tag.value { background:rgba(52,211,153,0.1); color:#34d399; border:1px solid rgba(52,211,153,0.2); }
+.deal-cta { margin-left:auto; }
+.deals-header-sub { font-size:13px; color:#6b7280; margin-bottom:20px; padding:12px 16px; background:rgba(255,209,102,0.05); border:1px solid rgba(255,209,102,0.12); border-radius:10px; line-height:1.5; }
+.deals-header-sub strong { color:#FFD166; }
+
 /* More card hover */
 .ob-more-card { margin-top:20px; width:100%; max-width:360px; background:rgba(255,209,102,0.04); border:1px solid rgba(255,209,102,0.15); border-radius:12px; padding:14px 18px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:border-color 0.2s, background 0.2s; }
 .ob-more-card:hover { border-color:rgba(255,209,102,0.45); background:rgba(255,209,102,0.07); }
@@ -227,6 +251,7 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     <div class="nav-section">OPTIMIZE</div>
     <div class="nav-item" onclick="show('optimize')"><span class="nav-icon">🧠</span> Points Intelligence</div>
     <div class="nav-item" onclick="show('transfer')"><span class="nav-icon">✈️</span> Airline Transfers</div>
+    <div class="nav-item" onclick="show('deals')"><span class="nav-icon">🔥</span> Deals Scout <span style="background:rgba(255,100,100,0.2);color:#f87171;font-size:9px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:4px;">5 NEW</span></span></div>
     <div class="nav-section">MARKETPLACE</div>
     <div class="nav-item" onclick="show('market')"><span class="nav-icon">🛒</span> Miles Marketplace</div>
     <div class="nav-item" onclick="show('lounges')"><span class="nav-icon">🛋️</span> Lounge Access</div>
@@ -394,6 +419,16 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
         <div class="card"><div class="stat-label">EXPIRING SOON</div><div class="stat-value" style="font-size:28px;color:#fbbf24;">28K</div><div class="stat-sub">Axis · 45 days</div></div>
         <div class="card"><div class="stat-label">MARKETPLACE</div><div class="stat-value" style="font-size:28px;color:#4ade80;">₹8,200</div><div class="stat-sub">Earned this month</div></div>
         <div class="card"><div class="stat-label">LOUNGES USED</div><div class="stat-value" style="font-size:28px;color:#a78bfa;">6</div><div class="stat-sub">This year · 3 networks</div></div>
+      </div>
+
+      <!-- Deals nudge -->
+      <div class="alert" style="background:rgba(255,209,102,0.06);border:1px solid rgba(255,209,102,0.2);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;" onclick="show('deals')">
+        <span style="font-size:22px;">🔥</span>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;color:#FFD166;">APEX found 5 deals matched to your cards</div>
+          <div style="font-size:12px;color:#6b7280;margin-top:2px;">Vistara 3x bonus · IndiGo flash sale · Amex transfer offer — ending soon</div>
+        </div>
+        <div style="font-size:13px;color:#FFD166;font-weight:600;white-space:nowrap;">View →</div>
       </div>
 
       <!-- Alerts -->
@@ -927,6 +962,112 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
       </div>
     </div>
 
+    <!-- ════════════════════════════════════════
+         SCREEN: DEALS SCOUT
+    ════════════════════════════════════════ -->
+    <div id="s-deals" class="screen">
+      <div class="page-title">Deals Scout 🔥</div>
+      <div class="page-sub">APEX monitors airline promotions 24/7 and surfaces what's relevant to your cards — automatically.</div>
+
+      <div class="deals-header-sub">
+        <strong>5 deals matched to your cards</strong> · Vistara, IndiGo, Air India, Emirates, Amex transfer bonus — all ending within 14 days. We found these so you didn't have to.
+      </div>
+
+      <!-- Filters -->
+      <div class="deals-filter">
+        <div class="deals-filter-btn active" onclick="dealsFilter(this,'all')">All Deals</div>
+        <div class="deals-filter-btn" onclick="dealsFilter(this,'bonus')">Bonus Points</div>
+        <div class="deals-filter-btn" onclick="dealsFilter(this,'sale')">Flight Sales</div>
+        <div class="deals-filter-btn" onclick="dealsFilter(this,'transfer')">Transfer Offers</div>
+        <div class="deals-filter-btn" onclick="dealsFilter(this,'hotel')">Hotels</div>
+      </div>
+
+      <!-- Deal 1 -->
+      <div class="deal-card hot" data-type="bonus">
+        <div class="deal-airline">
+          <div class="deal-airline-icon" style="background:rgba(255,120,0,0.1);">✈️</div>
+          <div><div class="deal-airline-name">Vistara (Air India)</div><div class="deal-airline-type">Bonus Points Promotion</div></div>
+        </div>
+        <div class="deal-headline">3x Points on All International Bookings</div>
+        <div class="deal-desc">Earn triple Club Vistara points on every international ticket booked directly through Vistara.com or the app. Stackable with your credit card rewards.</div>
+        <div class="deal-meta">
+          <span class="deal-tag expiry">⏰ Ends Mar 21</span>
+          <span class="deal-tag card">💳 HDFC Infinia · Amex</span>
+          <span class="deal-tag value">+₹8,400 potential value</span>
+          <button class="btn btn-gold deal-cta" style="padding:7px 16px;font-size:12px;">Book Now →</button>
+        </div>
+      </div>
+
+      <!-- Deal 2 -->
+      <div class="deal-card hot" data-type="sale">
+        <div class="deal-airline">
+          <div class="deal-airline-icon" style="background:rgba(0,180,255,0.1);">🛫</div>
+          <div><div class="deal-airline-name">IndiGo</div><div class="deal-airline-type">Flash Sale</div></div>
+        </div>
+        <div class="deal-headline">50% Off Base Fare — 200+ Routes</div>
+        <div class="deal-desc">IndiGo's Holi sale. Domestic fares from ₹999. Travel window: Apr–Jun 2026. Book today, pay with your Axis Magnus for 5x accelerated rewards.</div>
+        <div class="deal-meta">
+          <span class="deal-tag expiry">⏰ Ends Mar 12 · 2 days left</span>
+          <span class="deal-tag card">💳 Axis Magnus · HDFC</span>
+          <span class="deal-tag value">From ₹999</span>
+          <button class="btn btn-gold deal-cta" style="padding:7px 16px;font-size:12px;">View Sale →</button>
+        </div>
+      </div>
+
+      <!-- Deal 3 -->
+      <div class="deal-card new" data-type="transfer">
+        <div class="deal-airline">
+          <div class="deal-airline-icon" style="background:rgba(212,175,55,0.1);">🌐</div>
+          <div><div class="deal-airline-name">Amex → Emirates Skywards</div><div class="deal-airline-type">Transfer Bonus</div></div>
+        </div>
+        <div class="deal-headline">30% Bonus Miles on Transfers</div>
+        <div class="deal-desc">Transfer your Amex Membership Rewards to Emirates Skywards and receive a 30% bonus through March 31. Your 78,400 MR become 1,01,920 Skywards miles.</div>
+        <div class="deal-meta">
+          <span class="deal-tag expiry">⏰ Ends Mar 31</span>
+          <span class="deal-tag card">💳 Amex Platinum Travel</span>
+          <span class="deal-tag value">+23,520 bonus miles</span>
+          <button class="btn btn-gold deal-cta" style="padding:7px 16px;font-size:12px;">Transfer →</button>
+        </div>
+      </div>
+
+      <!-- Deal 4 -->
+      <div class="deal-card" data-type="bonus">
+        <div class="deal-airline">
+          <div class="deal-airline-icon" style="background:rgba(255,60,60,0.08);">🛩️</div>
+          <div><div class="deal-airline-name">Air India</div><div class="deal-airline-type">Bonus Miles Promo</div></div>
+        </div>
+        <div class="deal-headline">Double Miles on Rajdhani Routes</div>
+        <div class="deal-desc">Earn 2x Flying Returns miles on all Rajdhani tier routes (DEL–BOM, DEL–BLR, BOM–BLR). Valid on tickets booked and flown before Apr 15.</div>
+        <div class="deal-meta">
+          <span class="deal-tag expiry">⏰ Ends Apr 15</span>
+          <span class="deal-tag card">💳 All Cards</span>
+          <span class="deal-tag value">2x miles</span>
+          <button class="btn btn-ghost deal-cta" style="padding:7px 16px;font-size:12px;">Learn More</button>
+        </div>
+      </div>
+
+      <!-- Deal 5 -->
+      <div class="deal-card new" data-type="hotel">
+        <div class="deal-airline">
+          <div class="deal-airline-icon" style="background:rgba(167,139,250,0.1);">🏨</div>
+          <div><div class="deal-airline-name">Marriott Bonvoy</div><div class="deal-airline-type">Points + Cash Offer</div></div>
+        </div>
+        <div class="deal-headline">5,000 Bonus Points Per Stay — Asia Pacific</div>
+        <div class="deal-desc">Book any Asia Pacific Marriott property with your Amex and earn an extra 5,000 Bonvoy points per stay. Stackable with existing card multipliers.</div>
+        <div class="deal-meta">
+          <span class="deal-tag expiry">⏰ Ends Mar 25</span>
+          <span class="deal-tag card">💳 Amex Platinum</span>
+          <span class="deal-tag value">+5,000 pts/stay</span>
+          <button class="btn btn-ghost deal-cta" style="padding:7px 16px;font-size:12px;">Book →</button>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:24px;padding:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;">
+        <div style="font-size:13px;color:#6b7280;">APEX monitors 40+ airlines and 15 loyalty programs continuously.</div>
+        <div style="font-size:12px;color:#374151;margin-top:4px;">New deals matched to your portfolio are surfaced instantly — no searching required.</div>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -954,6 +1095,15 @@ function show(name) {
 function setMobileActive(el) {
   document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
+}
+
+// Deals filter
+function dealsFilter(btn, type) {
+  document.querySelectorAll('.deals-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.deal-card').forEach(card => {
+    card.style.display = (type === 'all' || card.dataset.type === type) ? 'block' : 'none';
+  });
 }
 
 // Reset onboard to intro state
