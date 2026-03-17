@@ -130,6 +130,109 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
 .alert-info { background: rgba(96,165,250,0.07); border: 1px solid rgba(96,165,250,0.2); }
 .alert-success { background: rgba(74,222,128,0.07); border: 1px solid rgba(74,222,128,0.2); }
 
+/* ── ENTRY OPTIONS ── */
+.entry-wrap { max-width: 700px; margin: 0 auto; padding: 40px 0 60px; }
+.entry-hero { text-align: center; margin-bottom: 48px; }
+.entry-hero-logo { font-size: 36px; font-weight: 900; letter-spacing: 0.2em; background: linear-gradient(135deg, #FFD166, #FF9F1C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+.entry-hero-sub { font-size: 14px; color: #6b7280; line-height: 1.6; max-width: 400px; margin: 0 auto; }
+.entry-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+.entry-path { border-radius: 20px; padding: 32px 28px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+.entry-path:hover { transform: translateY(-3px); }
+.entry-path-b2c { background: linear-gradient(145deg, #0f1a2e, #0d1117); border: 1.5px solid rgba(255,209,102,0.3); }
+.entry-path-b2c:hover { border-color: rgba(255,209,102,0.7); box-shadow: 0 16px 48px rgba(255,209,102,0.1); }
+.entry-path-b2b { background: linear-gradient(145deg, #0e1520, #0d1117); border: 1.5px solid rgba(96,165,250,0.25); }
+.entry-path-b2b:hover { border-color: rgba(96,165,250,0.6); box-shadow: 0 16px 48px rgba(96,165,250,0.08); }
+.entry-path-tag { font-size: 9px; font-weight: 800; letter-spacing: 0.18em; margin-bottom: 20px; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+.tag-b2c { background: rgba(255,209,102,0.1); color: #FFD166; border: 1px solid rgba(255,209,102,0.3); }
+.tag-b2b { background: rgba(96,165,250,0.1); color: #60a5fa; border: 1px solid rgba(96,165,250,0.25); }
+.entry-path-icon { font-size: 42px; margin-bottom: 16px; }
+.entry-path-title { font-size: 20px; font-weight: 800; color: #f0f2f8; margin-bottom: 8px; }
+.entry-path-desc { font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 24px; }
+.entry-path-features { margin-bottom: 28px; }
+.entry-path-feature { font-size: 12px; color: #9ca3af; padding: 5px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.entry-path-feature:last-child { border-bottom: none; }
+.entry-cta { display: flex; align-items: center; justify-content: space-between; }
+.entry-cta-text { font-size: 13px; font-weight: 700; }
+.entry-cta-arrow { font-size: 20px; font-weight: 300; }
+.b2c-cta-text { color: #FFD166; }
+.b2b-cta-text { color: #60a5fa; }
+.entry-path-glow { position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; border-radius: 50%; opacity: 0.08; }
+.glow-gold { background: radial-gradient(circle, #FFD166, transparent 70%); }
+.glow-blue { background: radial-gradient(circle, #60a5fa, transparent 70%); }
+
+/* ── B2C FLOW ── */
+.b2c-wrap { max-width: 440px; margin: 0 auto; padding: 40px 0 80px; }
+.b2c-step { display: none; animation: fadeIn 0.3s ease; }
+.b2c-step.active { display: block; }
+.b2c-progress { display: flex; gap: 6px; margin-bottom: 40px; }
+.b2c-prog-dot { height: 3px; flex: 1; background: rgba(255,255,255,0.1); border-radius: 2px; transition: background 0.3s; }
+.b2c-prog-dot.done { background: #FFD166; }
+.b2c-back { font-size: 12px; color: #4b5563; cursor: pointer; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 5px; }
+.b2c-back:hover { color: #9ca3af; }
+
+/* Step 1 — Hook */
+.b2c-hook-label { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: #4b5563; margin-bottom: 16px; }
+.b2c-hook-title { font-size: 28px; font-weight: 900; color: #f0f2f8; line-height: 1.25; margin-bottom: 8px; }
+.b2c-hook-sub { font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 32px; }
+.b2c-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
+.b2c-card-tile { background: #0d1117; border: 1.5px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.15s; }
+.b2c-card-tile:hover { border-color: rgba(255,209,102,0.4); background: rgba(255,209,102,0.04); }
+.b2c-card-tile.selected { border-color: #FFD166; background: rgba(255,209,102,0.07); }
+.b2c-card-tile-logo { font-size: 22px; margin-bottom: 6px; }
+.b2c-card-tile-name { font-size: 10px; color: #9ca3af; font-weight: 600; }
+.b2c-spend-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #4b5563; margin-bottom: 10px; }
+.b2c-spend-row { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.b2c-spend-input { background: #0d1117; border: 1.5px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px 16px; font-size: 18px; font-weight: 700; color: #f0f2f8; width: 100%; font-family: inherit; }
+.b2c-spend-input:focus { outline: none; border-color: rgba(255,209,102,0.5); }
+.b2c-spend-hint { font-size: 11px; color: #374151; margin-bottom: 28px; }
+.b2c-btn-full { width: 100%; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 700; border: none; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.b2c-btn-gold { background: linear-gradient(135deg, #FFD166, #FF9F1C); color: #080c14; }
+.b2c-btn-gold:hover { opacity: 0.92; transform: translateY(-1px); }
+.b2c-btn-gold:disabled { opacity: 0.35; transform: none; cursor: not-allowed; }
+
+/* Step 2 — Punch */
+.b2c-punch-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: #6b7280; margin-bottom: 20px; }
+.b2c-punch-number { font-size: 64px; font-weight: 900; color: #f87171; line-height: 1; margin-bottom: 4px; }
+.b2c-punch-label { font-size: 13px; color: #6b7280; margin-bottom: 32px; }
+.b2c-punch-breakdown { background: #0d1117; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px; margin-bottom: 28px; }
+.b2c-breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px; }
+.b2c-breakdown-row:last-child { border-bottom: none; }
+.b2c-breakdown-label { color: #9ca3af; }
+.b2c-breakdown-val { color: #f87171; font-weight: 700; }
+.b2c-punch-cta-sub { font-size: 12px; color: #4b5563; text-align: center; margin-top: 12px; cursor: pointer; }
+
+/* Step 3 — Ask */
+.b2c-ask-icon { font-size: 40px; margin-bottom: 20px; }
+.b2c-ask-title { font-size: 24px; font-weight: 800; color: #f0f2f8; margin-bottom: 8px; }
+.b2c-ask-sub { font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 28px; }
+.b2c-email-input { width: 100%; background: #0d1117; border: 1.5px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 14px 16px; font-size: 15px; color: #f0f2f8; font-family: inherit; margin-bottom: 12px; }
+.b2c-email-input:focus { outline: none; border-color: rgba(255,209,102,0.5); }
+.b2c-trust-row { display: flex; gap: 16px; justify-content: center; margin-bottom: 24px; font-size: 11px; color: #4b5563; }
+.b2c-skip { font-size: 12px; color: #374151; text-align: center; cursor: pointer; margin-top: 12px; }
+.b2c-skip:hover { color: #6b7280; }
+
+/* Step 4 — Win */
+.b2c-win-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: #4ade80; margin-bottom: 20px; }
+.b2c-win-title { font-size: 24px; font-weight: 800; color: #f0f2f8; margin-bottom: 8px; }
+.b2c-win-sub { font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 28px; }
+.b2c-win-card { background: linear-gradient(135deg, #0f1e36, #1a2a4a); border: 1.5px solid rgba(255,209,102,0.35); border-radius: 16px; padding: 24px; margin-bottom: 20px; position: relative; overflow: hidden; }
+.b2c-win-card::before { content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(255,209,102,0.15), transparent 70%); border-radius: 50%; }
+.b2c-win-card-label { font-size: 10px; font-weight: 800; letter-spacing: 0.15em; color: rgba(255,209,102,0.6); margin-bottom: 8px; }
+.b2c-win-card-name { font-size: 20px; font-weight: 900; color: #FFD166; margin-bottom: 6px; }
+.b2c-win-card-reason { font-size: 13px; color: #9ca3af; line-height: 1.5; margin-bottom: 16px; }
+.b2c-win-saving { display: flex; align-items: center; gap: 12px; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 10px; padding: 12px 16px; }
+.b2c-win-saving-num { font-size: 22px; font-weight: 900; color: #4ade80; }
+.b2c-win-saving-label { font-size: 12px; color: #4b5563; }
+.b2c-win-actions { display: flex; flex-direction: column; gap: 10px; }
+.b2c-btn-secondary { width: 100%; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 600; border: 1.5px solid rgba(255,255,255,0.1); background: transparent; color: #9ca3af; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+.b2c-btn-secondary:hover { border-color: rgba(255,255,255,0.25); color: #e8eaf0; }
+
+@media (max-width: 760px) {
+  .entry-paths { grid-template-columns: 1fr; }
+  .b2c-card-grid { grid-template-columns: repeat(3, 1fr); }
+  .b2c-punch-number { font-size: 52px; }
+}
+
 /* Mobile hint */
 .mobile-hint { display: none; }
 
@@ -624,7 +727,10 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     <div class="nav-item" onclick="show('lounges')"><span class="nav-icon">🛋️</span> Lounge Access</div>
     <div class="nav-section">ACCOUNT</div>
     <div class="nav-item" onclick="show('premium')"><span class="nav-icon">⭐</span> Premium Plans</div>
-    <div class="nav-item active" onclick="show('onboard')"><span class="nav-icon">◀</span> App Intro</div>
+    <div class="nav-item" onclick="show('onboard')"><span class="nav-icon">◀</span> App Intro (B2B)</div>
+    <div class="nav-section">ONBOARDING</div>
+    <div class="nav-item active" onclick="show('entry')"><span class="nav-icon">🚪</span> Entry Options</div>
+    <div class="nav-item" onclick="show('b2c')"><span class="nav-icon">✨</span> New User Flow (B2C)</div>
     <div class="nav-section">INTELLIGENCE</div>
     <div class="nav-item" onclick="show('travel-intel')"><span class="nav-icon">🌐</span> Travel Intelligence <span style="background:rgba(248,113,113,0.18);color:#f87171;font-size:9px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:4px;">3 ALERTS</span></div>
   </nav>
@@ -1637,6 +1743,203 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
       </div>
     </div>
 
+    <!-- ════════════════════════════════════════
+         SCREEN: ENTRY OPTIONS
+    ════════════════════════════════════════ -->
+    <div id="s-entry" class="screen active">
+      <div class="entry-wrap">
+        <div class="entry-hero">
+          <div class="entry-hero-logo">APEX</div>
+          <div style="font-size:10px;letter-spacing:0.2em;color:#4b5563;margin-bottom:12px;font-weight:700;">TWO PATHS. ONE PLATFORM.</div>
+          <div class="entry-hero-sub">Choose how you want to experience APEX. Both paths lead to the same intelligence — the journey is different.</div>
+        </div>
+
+        <div class="entry-paths">
+          <!-- B2C Path -->
+          <div class="entry-path entry-path-b2c" onclick="show('b2c')">
+            <div class="entry-path-glow glow-gold"></div>
+            <div class="entry-path-tag tag-b2c">INDIVIDUAL</div>
+            <div class="entry-path-icon">💳</div>
+            <div class="entry-path-title">New to APEX?</div>
+            <div class="entry-path-desc">Find out how much you're leaving on the table. Takes 60 seconds, no signup required.</div>
+            <div class="entry-path-features">
+              <div class="entry-path-feature"><span style="color:#FFD166;">✦</span> See your missed value instantly</div>
+              <div class="entry-path-feature"><span style="color:#FFD166;">✦</span> Pick your cards from a visual grid</div>
+              <div class="entry-path-feature"><span style="color:#FFD166;">✦</span> Get your best card recommendation</div>
+              <div class="entry-path-feature"><span style="color:#FFD166;">✦</span> Zero friction — no account needed</div>
+            </div>
+            <div class="entry-cta">
+              <span class="entry-cta-text b2c-cta-text">Start free audit →</span>
+              <span class="entry-cta-arrow" style="color:#FFD166;">›</span>
+            </div>
+          </div>
+
+          <!-- B2B Path -->
+          <div class="entry-path entry-path-b2b" onclick="show('onboard')">
+            <div class="entry-path-glow glow-blue"></div>
+            <div class="entry-path-tag tag-b2b">BUSINESS</div>
+            <div class="entry-path-icon">🏢</div>
+            <div class="entry-path-title">Enterprise Setup</div>
+            <div class="entry-path-desc">Full onboarding for companies managing travel programmes, corporate cards, and team spend.</div>
+            <div class="entry-path-features">
+              <div class="entry-path-feature"><span style="color:#60a5fa;">✦</span> Activate your APEX business card</div>
+              <div class="entry-path-feature"><span style="color:#60a5fa;">✦</span> Connect company travel spend</div>
+              <div class="entry-path-feature"><span style="color:#60a5fa;">✦</span> Multi-card programme management</div>
+              <div class="entry-path-feature"><span style="color:#60a5fa;">✦</span> Full dashboard + intelligence suite</div>
+            </div>
+            <div class="entry-cta">
+              <span class="entry-cta-text b2b-cta-text">Set up business account →</span>
+              <span class="entry-cta-arrow" style="color:#60a5fa;">›</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center;font-size:12px;color:#374151;">
+          Not sure? <span style="color:#FFD166;cursor:pointer;" onclick="show('b2c')">Start with the free audit</span> — takes 60 seconds.
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SCREEN: B2C NEW USER FLOW
+    ════════════════════════════════════════ -->
+    <div id="s-b2c" class="screen">
+      <div class="b2c-wrap">
+
+        <!-- Progress bar -->
+        <div class="b2c-progress" id="b2c-progress">
+          <div class="b2c-prog-dot done" id="b2c-dot-0"></div>
+          <div class="b2c-prog-dot" id="b2c-dot-1"></div>
+          <div class="b2c-prog-dot" id="b2c-dot-2"></div>
+          <div class="b2c-prog-dot" id="b2c-dot-3"></div>
+        </div>
+
+        <!-- STEP 1: THE HOOK -->
+        <div class="b2c-step active" id="b2c-s1">
+          <div class="b2c-hook-label">STEP 1 OF 4 · FREE AUDIT</div>
+          <div class="b2c-hook-title">Find out what your cards are really worth.</div>
+          <div class="b2c-hook-sub">Select the cards you use. We'll calculate exactly what you've been leaving behind.</div>
+
+          <div class="b2c-card-grid">
+            <div class="b2c-card-tile" onclick="b2cToggleCard(this,'hdfc')">
+              <div class="b2c-card-tile-logo">🔵</div>
+              <div class="b2c-card-tile-name">HDFC</div>
+            </div>
+            <div class="b2c-card-tile" onclick="b2cToggleCard(this,'amex')">
+              <div class="b2c-card-tile-logo">🟦</div>
+              <div class="b2c-card-tile-name">Amex</div>
+            </div>
+            <div class="b2c-card-tile" onclick="b2cToggleCard(this,'axis')">
+              <div class="b2c-card-tile-logo">🟥</div>
+              <div class="b2c-card-tile-name">Axis</div>
+            </div>
+            <div class="b2c-card-tile" onclick="b2cToggleCard(this,'sbi')">
+              <div class="b2c-card-tile-logo">🟩</div>
+              <div class="b2c-card-tile-name">SBI</div>
+            </div>
+            <div class="b2c-card-tile" onclick="b2cToggleCard(this,'icici')">
+              <div class="b2c-card-tile-logo">🟧</div>
+              <div class="b2c-card-tile-name">ICICI</div>
+            </div>
+            <div class="b2c-card-tile" onclick="b2cToggleCard(this,'other')">
+              <div class="b2c-card-tile-logo">➕</div>
+              <div class="b2c-card-tile-name">Other</div>
+            </div>
+          </div>
+
+          <div class="b2c-spend-label">MONTHLY SPEND (APPROX.)</div>
+          <input class="b2c-spend-input" type="text" id="b2c-spend" placeholder="₹ e.g. 50,000" oninput="b2cUpdateSpend(this)" />
+          <div class="b2c-spend-hint">Dining, travel, online, everything. Rough estimate is fine.</div>
+
+          <button class="b2c-btn-full b2c-btn-gold" id="b2c-step1-btn" onclick="b2cStep(2)" disabled>
+            See my missed value →
+          </button>
+        </div>
+
+        <!-- STEP 2: THE PUNCH -->
+        <div class="b2c-step" id="b2c-s2">
+          <div class="b2c-back" onclick="b2cStep(1)">← Back</div>
+          <div class="b2c-punch-eyebrow">AUDIT COMPLETE · LAST 12 MONTHS</div>
+          <div class="b2c-punch-number" id="b2c-missed-num">₹14,200</div>
+          <div class="b2c-punch-label">missed in rewards last year</div>
+
+          <div class="b2c-punch-breakdown">
+            <div class="b2c-breakdown-row">
+              <span class="b2c-breakdown-label">Wrong card for dining</span>
+              <span class="b2c-breakdown-val" id="bd-dining">₹4,800</span>
+            </div>
+            <div class="b2c-breakdown-row">
+              <span class="b2c-breakdown-label">Missed travel bonus categories</span>
+              <span class="b2c-breakdown-val" id="bd-travel">₹5,200</span>
+            </div>
+            <div class="b2c-breakdown-row">
+              <span class="b2c-breakdown-label">Points expired before use</span>
+              <span class="b2c-breakdown-val" id="bd-expired">₹2,900</span>
+            </div>
+            <div class="b2c-breakdown-row">
+              <span class="b2c-breakdown-label">Suboptimal redemptions</span>
+              <span class="b2c-breakdown-val" id="bd-redemption">₹1,300</span>
+            </div>
+          </div>
+
+          <button class="b2c-btn-full b2c-btn-gold" onclick="b2cStep(3)">
+            Show me how to fix this →
+          </button>
+          <div class="b2c-punch-cta-sub" onclick="b2cStep(1)">Recalculate with different cards</div>
+        </div>
+
+        <!-- STEP 3: THE ASK -->
+        <div class="b2c-step" id="b2c-s3">
+          <div class="b2c-back" onclick="b2cStep(2)">← Back</div>
+          <div class="b2c-ask-icon">🎯</div>
+          <div class="b2c-ask-title">Get your APEX playbook.</div>
+          <div class="b2c-ask-sub">We'll send your personalised card optimisation strategy and alert you before your points expire.</div>
+          <input class="b2c-email-input" type="email" id="b2c-email" placeholder="Enter your email" oninput="b2cValidateEmail()" />
+          <div class="b2c-trust-row">
+            <span>🔒 Encrypted</span>
+            <span>🚫 No spam</span>
+            <span>✉ One email only</span>
+          </div>
+          <button class="b2c-btn-full b2c-btn-gold" id="b2c-step3-btn" onclick="b2cStep(4)" disabled>
+            Get my playbook →
+          </button>
+          <div class="b2c-skip" onclick="b2cStep(4)">Skip — show me the recommendation</div>
+        </div>
+
+        <!-- STEP 4: THE WIN -->
+        <div class="b2c-step" id="b2c-s4">
+          <div class="b2c-win-badge">✦ YOUR APEX RECOMMENDATION</div>
+          <div class="b2c-win-title">Your top card this month:</div>
+          <div class="b2c-win-sub">Based on your spend pattern, this single switch recovers most of your missed value.</div>
+
+          <div class="b2c-win-card">
+            <div class="b2c-win-card-label">PRIMARY CARD · OPTIMISED FOR YOU</div>
+            <div class="b2c-win-card-name" id="b2c-rec-card">Axis Magnus</div>
+            <div class="b2c-win-card-reason" id="b2c-rec-reason">Earns 12 EDGE Miles per ₹200 on all spends — 4x better than your current default on dining and travel categories.</div>
+            <div class="b2c-win-saving">
+              <div>
+                <div class="b2c-win-saving-num" id="b2c-rec-saving">₹11,400</div>
+                <div class="b2c-win-saving-label">additional value per year at your spend level</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="b2c-win-actions">
+            <button class="b2c-btn-full b2c-btn-gold" onclick="show('dashboard')">
+              Open full APEX dashboard →
+            </button>
+            <button class="b2c-btn-secondary" onclick="show('optimize')">
+              See all card optimisations
+            </button>
+            <button class="b2c-btn-secondary" onclick="b2cReset()">
+              Start over
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -1893,10 +2196,109 @@ function dismissDisruptAlert() {
   setTimeout(() => { overlay.style.display = 'none'; }, 300);
 }
 
-// Show onboard first
-show('onboard');
+// ── B2C FLOW LOGIC ──
+let b2cSelectedCards = new Set();
+let b2cSpend = 0;
+let b2cCurrentStep = 1;
+
+function b2cToggleCard(el, card) {
+  if (b2cSelectedCards.has(card)) {
+    b2cSelectedCards.delete(card);
+    el.classList.remove('selected');
+  } else {
+    b2cSelectedCards.add(card);
+    el.classList.add('selected');
+  }
+  b2cCheckStep1();
+}
+
+function b2cUpdateSpend(el) {
+  const raw = el.value.replace(/[^0-9]/g, '');
+  b2cSpend = parseInt(raw) || 0;
+  if (raw) {
+    el.value = '₹ ' + parseInt(raw).toLocaleString('en-IN');
+  }
+  b2cCheckStep1();
+}
+
+function b2cCheckStep1() {
+  const btn = document.getElementById('b2c-step1-btn');
+  if (btn) btn.disabled = !(b2cSelectedCards.size > 0 && b2cSpend > 0);
+}
+
+function b2cValidateEmail() {
+  const val = document.getElementById('b2c-email')?.value || '';
+  const btn = document.getElementById('b2c-step3-btn');
+  if (btn) btn.disabled = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+}
+
+function b2cStep(n) {
+  // Update progress dots
+  for (let i = 0; i < 4; i++) {
+    const d = document.getElementById('b2c-dot-' + i);
+    if (d) d.classList.toggle('done', i < n);
+  }
+  // Update missed value based on spend
+  if (n === 2 && b2cSpend > 0) {
+    const annual = b2cSpend * 12;
+    const missed = Math.round(annual * 0.024);
+    document.getElementById('b2c-missed-num').textContent = '₹' + missed.toLocaleString('en-IN');
+    document.getElementById('bd-dining').textContent = '₹' + Math.round(missed * 0.34).toLocaleString('en-IN');
+    document.getElementById('bd-travel').textContent = '₹' + Math.round(missed * 0.37).toLocaleString('en-IN');
+    document.getElementById('bd-expired').textContent = '₹' + Math.round(missed * 0.20).toLocaleString('en-IN');
+    document.getElementById('bd-redemption').textContent = '₹' + Math.round(missed * 0.09).toLocaleString('en-IN');
+  }
+  // Pick best card recommendation
+  if (n === 4) {
+    const cards = [...b2cSelectedCards];
+    const recs = {
+      hdfc: ['HDFC Infinia', 'Earns 5 Reward Points per ₹150 on all spends with unlimited domestic lounge access — highest baseline rate in your portfolio.'],
+      amex: ['Amex Platinum Travel', 'Earns 1 Membership Reward per ₹50 on all spends, with ₹10,000 Taj vouchers and ₹7,500 IndiGo credit annually.'],
+      axis: ['Axis Magnus', 'Earns 12 EDGE Miles per ₹200 on all spends — 4x better than most cards on dining and travel categories.'],
+      sbi: ['SBI Cashback Card', 'Earns 5% cashback on all online spends and 1% on offline — highest direct cashback rate with no category restrictions.'],
+      icici: ['ICICI Emeralde', 'Unlimited airport lounge access globally + 4 reward points per ₹100 — best for frequent travellers.'],
+      other: ['Axis Magnus', 'Based on your spend pattern, a premium travel card unlocks the most value across dining, travel and online categories.']
+    };
+    const pick = cards.includes('axis') ? 'axis' : cards.includes('hdfc') ? 'hdfc' : cards[0] || 'axis';
+    const [cardName, reason] = recs[pick] || recs['axis'];
+    document.getElementById('b2c-rec-card').textContent = cardName;
+    document.getElementById('b2c-rec-reason').textContent = reason;
+    const annual = b2cSpend * 12;
+    document.getElementById('b2c-rec-saving').textContent = '₹' + Math.round(annual * 0.019).toLocaleString('en-IN');
+  }
+  // Show the right step
+  for (let i = 1; i <= 4; i++) {
+    const s = document.getElementById('b2c-s' + i);
+    if (s) s.classList.toggle('active', i === n);
+  }
+  b2cCurrentStep = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function b2cReset() {
+  b2cSelectedCards.clear();
+  b2cSpend = 0;
+  b2cCurrentStep = 1;
+  document.querySelectorAll('.b2c-card-tile').forEach(t => t.classList.remove('selected'));
+  const si = document.getElementById('b2c-spend');
+  if (si) si.value = '';
+  const ei = document.getElementById('b2c-email');
+  if (ei) ei.value = '';
+  b2cCheckStep1();
+  b2cStep(1);
+}
+
+// Reset B2C flow when navigating to it
+const _origShow = show;
+function show(name) {
+  _origShow(name);
+  if (name === 'b2c') b2cReset();
+}
+
+// Show entry screen first
+show('entry');
 document.querySelectorAll('.nav-item').forEach(n => {
-  if (n.getAttribute('onclick')?.includes("'onboard'")) n.classList.add('active');
+  if (n.getAttribute('onclick')?.includes("'entry'")) n.classList.add('active');
 });
 </script>
 </body>
