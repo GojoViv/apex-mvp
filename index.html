@@ -678,6 +678,34 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
   letter-spacing: 0.02em;
 }
 .btn-disrupt-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Scout Pipeline */
+.hv-pipeline-source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.hv-source-card { background: #0d1117; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px 16px; }
+.hv-source-name { font-size: 13px; font-weight: 700; color: #e8eaf0; margin-bottom: 2px; }
+.hv-source-handle { font-size: 10px; color: #4b5563; margin-bottom: 8px; }
+.hv-source-footer { display: flex; align-items: center; justify-content: space-between; }
+.hv-source-checked { font-size: 10px; color: #374151; }
+.hv-source-new { font-size: 10px; font-weight: 700; color: #FFD166; }
+.hv-source-new.zero { color: #374151; }
+.hv-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; display: inline-block; margin-right: 4px; }
+.hv-queue-card { background: #0d1117; border: 1px solid rgba(255,209,102,0.15); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; }
+.hv-queue-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.hv-queue-source { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: rgba(255,209,102,0.1); color: #FFD166; }
+.hv-queue-title { font-size: 13px; font-weight: 700; color: #f0f2f8; margin-bottom: 6px; line-height: 1.4; }
+.hv-queue-desc { font-size: 12px; color: #6b7280; line-height: 1.5; margin-bottom: 10px; }
+.hv-queue-actions { display: flex; align-items: center; gap: 8px; }
+.hv-queue-value { font-size: 11px; font-weight: 700; color: #4ade80; margin-left: auto; }
+.hv-btn-approve { padding: 6px 14px; border-radius: 8px; background: rgba(255,209,102,0.12); color: #FFD166; border: 1px solid rgba(255,209,102,0.3); font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+.hv-btn-approve:hover { background: rgba(255,209,102,0.2); }
+.hv-btn-skip { padding: 6px 14px; border-radius: 8px; background: transparent; color: #4b5563; border: 1px solid rgba(255,255,255,0.07); font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+.hv-btn-skip:hover { color: #6b7280; border-color: rgba(255,255,255,0.12); }
+.hv-pipeline-stats { display: flex; gap: 0; margin-top: 20px; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; }
+.hv-pipeline-stat { flex: 1; padding: 14px; text-align: center; border-right: 1px solid rgba(255,255,255,0.05); }
+.hv-pipeline-stat:last-child { border-right: none; }
+.hv-pipeline-stat-num { font-size: 22px; font-weight: 900; color: #FFD166; }
+.hv-pipeline-stat-label { font-size: 9px; letter-spacing: 0.08em; color: #4b5563; font-weight: 700; margin-top: 2px; }
+@media (max-width: 760px) { .hv-pipeline-source-grid { grid-template-columns: 1fr; } .hv-pipeline-stats { flex-wrap: wrap; } .hv-pipeline-stat { flex: 1 1 50%; } }
 </style>
 </head>
 <body>
@@ -2279,6 +2307,137 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
         </table>
       </div>
 
+      <!-- Scout Pipeline -->
+      <div style="margin-top:32px;">
+        <div style="margin-bottom:18px;">
+          <div style="font-size:13px;font-weight:900;letter-spacing:0.12em;color:#FFD166;margin-bottom:4px;">🛰️ SCOUT PIPELINE</div>
+          <div style="font-size:11px;color:#4b5563;">Live feed from monitored expert sources — hacks queued for APEX review</div>
+        </div>
+
+        <!-- Source Status Grid -->
+        <div class="hv-pipeline-source-grid">
+          <div class="hv-source-card">
+            <div class="hv-source-name">TheGreatIndianMiles</div>
+            <div class="hv-source-handle">@thegreatindianmiles</div>
+            <div class="hv-source-footer">
+              <span class="hv-source-checked">Checked 2h ago</span>
+              <span><span class="hv-status-dot"></span><span style="font-size:10px;color:#4ade80;font-weight:700;">ACTIVE</span></span>
+              <span class="hv-source-new">2 new items</span>
+            </div>
+          </div>
+          <div class="hv-source-card">
+            <div class="hv-source-name">Aly Hajiani</div>
+            <div class="hv-source-handle">@thatcreditcardguy</div>
+            <div class="hv-source-footer">
+              <span class="hv-source-checked">Checked 2h ago</span>
+              <span><span class="hv-status-dot"></span><span style="font-size:10px;color:#4ade80;font-weight:700;">ACTIVE</span></span>
+              <span class="hv-source-new">1 new item</span>
+            </div>
+          </div>
+          <div class="hv-source-card">
+            <div class="hv-source-name">CardExpert India</div>
+            <div class="hv-source-handle">@flywithsid / cardexpert.in</div>
+            <div class="hv-source-footer">
+              <span class="hv-source-checked">Checked 2h ago</span>
+              <span><span class="hv-status-dot"></span><span style="font-size:10px;color:#4ade80;font-weight:700;">ACTIVE</span></span>
+              <span class="hv-source-new zero">0 new items</span>
+            </div>
+          </div>
+          <div class="hv-source-card">
+            <div class="hv-source-name">One Mile at a Time</div>
+            <div class="hv-source-handle">@onemileatatime</div>
+            <div class="hv-source-footer">
+              <span class="hv-source-checked">Checked 2h ago</span>
+              <span><span class="hv-status-dot"></span><span style="font-size:10px;color:#4ade80;font-weight:700;">ACTIVE</span></span>
+              <span class="hv-source-new">3 new items</span>
+            </div>
+          </div>
+          <div class="hv-source-card">
+            <div class="hv-source-name">The Points Guy</div>
+            <div class="hv-source-handle">@thepointsguy</div>
+            <div class="hv-source-footer">
+              <span class="hv-source-checked">Checked 2h ago</span>
+              <span><span class="hv-status-dot"></span><span style="font-size:10px;color:#4ade80;font-weight:700;">ACTIVE</span></span>
+              <span class="hv-source-new">1 new item</span>
+            </div>
+          </div>
+          <div class="hv-source-card">
+            <div class="hv-source-name">Million Mile Secrets</div>
+            <div class="hv-source-handle">@MilMileSecrets</div>
+            <div class="hv-source-footer">
+              <span class="hv-source-checked">Checked 2h ago</span>
+              <span><span class="hv-status-dot"></span><span style="font-size:10px;color:#4ade80;font-weight:700;">ACTIVE</span></span>
+              <span class="hv-source-new zero">0 new items</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Approval Queue -->
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:#6b7280;margin-bottom:12px;">PENDING APPROVAL QUEUE</div>
+
+        <div class="hv-queue-card">
+          <div class="hv-queue-header">
+            <span class="hv-queue-source">OMAAT</span>
+            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:rgba(139,92,246,0.1);color:#a78bfa;">Business Class</span>
+          </div>
+          <div class="hv-queue-title">Cathay Asia Miles: 8-Segment Round-the-World Business Class for 240K Miles</div>
+          <div class="hv-queue-desc">The oneworld alliance sweet spot. Book via Cathay Pacific Asia Miles for up to 8 segments and 5 stopovers in Business Class round-the-world. HDFC/SBI cards that transfer to Asia Miles unlock this.</div>
+          <div class="hv-queue-actions">
+            <button class="hv-btn-approve" onclick="hvApprove(this)">✓ Add to Vault</button>
+            <button class="hv-btn-skip" onclick="hvSkip(this)">✗ Skip</button>
+            <span class="hv-queue-value">₹8–20L saved</span>
+          </div>
+        </div>
+
+        <div class="hv-queue-card">
+          <div class="hv-queue-header">
+            <span class="hv-queue-source">TheGreatIndianMiles</span>
+            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:rgba(59,130,246,0.1);color:#60a5fa;">Booking Trick</span>
+          </div>
+          <div class="hv-queue-title">Singapore KrisFlyer Spontaneous Escapes: Up to 50% Off Saver Awards</div>
+          <div class="hv-queue-desc">Singapore Airlines releases heavily discounted KrisFlyer saver awards on select routes 2–3 weeks before departure. Best for flexible HNI travellers. Watch the KrisFlyer Spontaneous Escapes page weekly.</div>
+          <div class="hv-queue-actions">
+            <button class="hv-btn-approve" onclick="hvApprove(this)">✓ Add to Vault</button>
+            <button class="hv-btn-skip" onclick="hvSkip(this)">✗ Skip</button>
+            <span class="hv-queue-value">50% fewer miles</span>
+          </div>
+        </div>
+
+        <div class="hv-queue-card">
+          <div class="hv-queue-header">
+            <span class="hv-queue-source">TheGreatIndianMiles</span>
+            <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;background:rgba(234,179,8,0.1);color:#facc15;">Status Hack</span>
+          </div>
+          <div class="hv-queue-title">Etihad Status Match: Gold for $99 — Then Fly Business on Miles</div>
+          <div class="hv-queue-desc">Etihad is offering Silver/Gold status matches for $59–$99. Gold gives you lounge access, priority boarding, and 50% bonus miles on every Etihad flight — making your award redemptions go further.</div>
+          <div class="hv-queue-actions">
+            <button class="hv-btn-approve" onclick="hvApprove(this)">✓ Add to Vault</button>
+            <button class="hv-btn-skip" onclick="hvSkip(this)">✗ Skip</button>
+            <span class="hv-queue-value">50% bonus miles earned</span>
+          </div>
+        </div>
+
+        <!-- Pipeline Stats -->
+        <div class="hv-pipeline-stats">
+          <div class="hv-pipeline-stat">
+            <div class="hv-pipeline-stat-num">7</div>
+            <div class="hv-pipeline-stat-label">HACKS LIVE IN VAULT</div>
+          </div>
+          <div class="hv-pipeline-stat">
+            <div class="hv-pipeline-stat-num">3</div>
+            <div class="hv-pipeline-stat-label">PENDING REVIEW</div>
+          </div>
+          <div class="hv-pipeline-stat">
+            <div class="hv-pipeline-stat-num">6</div>
+            <div class="hv-pipeline-stat-label">SOURCES MONITORED</div>
+          </div>
+          <div class="hv-pipeline-stat">
+            <div class="hv-pipeline-stat-num" style="font-size:14px;padding-top:4px;">Weekly</div>
+            <div class="hv-pipeline-stat-label">UPDATE CADENCE</div>
+          </div>
+        </div>
+      </div>
+
       <!-- More coming -->
       <div style="text-align:center;margin-top:24px;padding:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;">
         <div style="font-size:13px;color:#6b7280;margin-bottom:6px;">APEX scouts new hacks weekly from 12 expert sources.</div>
@@ -2660,6 +2819,22 @@ const _origShow = show;
 function show(name) {
   _origShow(name);
   if (name === 'b2c') b2cReset();
+}
+
+function hvApprove(btn) {
+  const card = btn.closest('.hv-queue-card');
+  card.style.opacity = '0.4';
+  card.style.pointerEvents = 'none';
+  btn.textContent = '✓ Added';
+  btn.style.background = 'rgba(74,222,128,0.15)';
+  btn.style.color = '#4ade80';
+  btn.style.borderColor = 'rgba(74,222,128,0.3)';
+}
+function hvSkip(btn) {
+  const card = btn.closest('.hv-queue-card');
+  card.style.transition = 'opacity 0.3s';
+  card.style.opacity = '0';
+  setTimeout(() => card.style.display = 'none', 300);
 }
 
 // Show entry screen first
