@@ -233,6 +233,51 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
   .b2c-punch-number { font-size: 52px; }
 }
 
+/* ── HACKS VAULT ── */
+.hv-filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.hv-tab { padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid rgba(255,255,255,0.08); color: #6b7280; transition: all 0.15s; }
+.hv-tab.active { background: rgba(255,209,102,0.1); color: #FFD166; border-color: rgba(255,209,102,0.3); }
+.hv-experts { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.hv-expert-chip { display: flex; align-items: center; gap: 8px; background: #0d1117; border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 8px 12px; font-size: 11px; cursor: pointer; transition: all 0.15s; }
+.hv-expert-chip:hover { border-color: rgba(255,209,102,0.3); }
+.hv-expert-chip .hv-expert-name { font-weight: 700; color: #e8eaf0; }
+.hv-expert-chip .hv-expert-tag { color: #4b5563; }
+.hv-expert-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.hv-hack-card { background: #0d1117; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; transition: border-color 0.15s; }
+.hv-hack-card:hover { border-color: rgba(255,209,102,0.2); }
+.hv-hack-card.featured { background: linear-gradient(135deg, #131c2e, #0d1117); border-color: rgba(255,209,102,0.22); }
+.hv-hack-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+.hv-hack-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.hv-hack-title { font-size: 14px; font-weight: 700; color: #f0f2f8; line-height: 1.4; margin-bottom: 4px; }
+.hv-hack-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hv-hack-source { font-size: 10px; font-weight: 700; color: #FFD166; letter-spacing: 0.05em; }
+.hv-hack-cat { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 6px; letter-spacing: 0.05em; }
+.hv-cat-biz { background: rgba(96,165,250,0.12); color: #60a5fa; }
+.hv-cat-points { background: rgba(255,209,102,0.12); color: #FFD166; }
+.hv-cat-hotel { background: rgba(167,139,250,0.12); color: #a78bfa; }
+.hv-cat-status { background: rgba(74,222,128,0.12); color: #4ade80; }
+.hv-cat-booking { background: rgba(251,191,36,0.12); color: #fbbf24; }
+.hv-hack-savings { font-size: 12px; font-weight: 800; color: #4ade80; margin-left: auto; white-space: nowrap; }
+.hv-hack-desc { font-size: 12px; color: #6b7280; line-height: 1.6; margin-bottom: 12px; }
+.hv-steps-toggle { font-size: 11px; font-weight: 700; color: #FFD166; cursor: pointer; display: flex; align-items: center; gap: 5px; border: none; background: none; padding: 0; font-family: inherit; }
+.hv-steps { display: none; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; }
+.hv-steps.open { display: block; }
+.hv-step-row { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 12px; color: #9ca3af; line-height: 1.5; }
+.hv-step-row:last-child { border-bottom: none; }
+.hv-step-num { width: 20px; height: 20px; border-radius: 50%; background: rgba(255,209,102,0.1); color: #FFD166; font-size: 9px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.hv-step-text strong { color: #e8eaf0; }
+.hv-cards-needed { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.hv-card-badge { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 6px; background: rgba(255,255,255,0.05); color: #9ca3af; border: 1px solid rgba(255,255,255,0.07); }
+.hv-scout-banner { background: linear-gradient(135deg, #0d1a2e, #0d1117); border: 1px solid rgba(96,165,250,0.2); border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+.hv-scout-icon { font-size: 28px; }
+.hv-scout-title { font-size: 13px; font-weight: 700; color: #e8eaf0; margin-bottom: 3px; }
+.hv-scout-sub { font-size: 11px; color: #4b5563; line-height: 1.5; }
+.hv-val-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+.hv-val-table th { font-size: 9px; letter-spacing: 0.08em; color: #4b5563; font-weight: 700; padding: 6px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.hv-val-table td { padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #9ca3af; }
+.hv-val-table tr:last-child td { border-bottom: none; }
+.hv-val-table .hv-val-win { color: #4ade80; font-weight: 700; }
+
 /* Mobile hint */
 .mobile-hint { display: none; }
 
@@ -733,6 +778,7 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
     <div class="nav-item" onclick="show('b2c')"><span class="nav-icon">✨</span> New User Flow (B2C)</div>
     <div class="nav-section">INTELLIGENCE</div>
     <div class="nav-item" onclick="show('travel-intel')"><span class="nav-icon">🌐</span> Travel Intelligence <span style="background:rgba(248,113,113,0.18);color:#f87171;font-size:9px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:4px;">3 ALERTS</span></div>
+    <div class="nav-item" onclick="show('hacks')"><span class="nav-icon">🔑</span> Hacks Vault <span style="background:rgba(255,209,102,0.18);color:#FFD166;font-size:9px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:4px;">NEW</span></div>
   </nav>
 
   <!-- MAIN -->
@@ -1940,6 +1986,306 @@ body { background: #080c14; font-family: 'Inter', sans-serif; color: #f0f2f8; mi
       </div>
     </div>
 
+    <!-- ════════════════════════════════════════
+         SCREEN: HACKS VAULT
+    ════════════════════════════════════════ -->
+    <div id="s-hacks" class="screen">
+      <div class="topbar">
+        <div>
+          <div class="page-title">🔑 Hacks Vault</div>
+          <div class="page-sub">Curated intelligence from the world's best travel wealth experts — decoded for your cards.</div>
+        </div>
+        <div class="topbar-right">
+          <div class="badge badge-gold">✦ EXPERT CURATED</div>
+          <div class="avatar">S</div>
+        </div>
+      </div>
+
+      <!-- Scout Banner -->
+      <div class="hv-scout-banner">
+        <div class="hv-scout-icon">🛰️</div>
+        <div>
+          <div class="hv-scout-title">APEX Intelligence Scout — Active</div>
+          <div class="hv-scout-sub">Monitoring 12 travel wealth experts across Instagram, YouTube & Discord. New hacks are reviewed, verified, and added weekly. Last scouted: Today · 6 new hacks this week.</div>
+        </div>
+      </div>
+
+      <!-- Expert Sources -->
+      <div class="section-title">INTELLIGENCE SOURCES</div>
+      <div class="hv-experts">
+        <div class="hv-expert-chip">
+          <div class="hv-expert-icon" style="background:rgba(255,209,102,0.1);">✈️</div>
+          <div><div class="hv-expert-name">TheGreatIndianMiles</div><div class="hv-expert-tag">Points · Business Class · India</div></div>
+        </div>
+        <div class="hv-expert-chip">
+          <div class="hv-expert-icon" style="background:rgba(96,165,250,0.1);">💳</div>
+          <div><div class="hv-expert-name">CardExpert India</div><div class="hv-expert-tag">Card Stacking · Earn Rate</div></div>
+        </div>
+        <div class="hv-expert-chip">
+          <div class="hv-expert-icon" style="background:rgba(167,139,250,0.1);">🏨</div>
+          <div><div class="hv-expert-name">AskMeBucks</div><div class="hv-expert-tag">Hotels · Lounge · Cashback</div></div>
+        </div>
+        <div class="hv-expert-chip">
+          <div class="hv-expert-icon" style="background:rgba(74,222,128,0.1);">🌍</div>
+          <div><div class="hv-expert-name">One Mile at a Time</div><div class="hv-expert-tag">Global Biz Class · Awards</div></div>
+        </div>
+        <div class="hv-expert-chip">
+          <div class="hv-expert-icon" style="background:rgba(251,191,36,0.1);">🎯</div>
+          <div><div class="hv-expert-name">The Points Guy</div><div class="hv-expert-tag">USA Cards · Transfer Bonuses</div></div>
+        </div>
+        <div class="hv-expert-chip" style="border-style:dashed;opacity:0.5;">
+          <div class="hv-expert-icon" style="background:rgba(255,255,255,0.04);">➕</div>
+          <div><div class="hv-expert-name">+ Suggest a Source</div><div class="hv-expert-tag">Curated by APEX team</div></div>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="section-title">HACK LIBRARY</div>
+      <div class="hv-filter-tabs">
+        <div class="hv-tab active" onclick="hvFilter(this,'all')">All Hacks</div>
+        <div class="hv-tab" onclick="hvFilter(this,'biz')">Business Class</div>
+        <div class="hv-tab" onclick="hvFilter(this,'points')">Points Transfer</div>
+        <div class="hv-tab" onclick="hvFilter(this,'hotel')">Hotels</div>
+        <div class="hv-tab" onclick="hvFilter(this,'status')">Status Hacks</div>
+        <div class="hv-tab" onclick="hvFilter(this,'booking')">Booking Tricks</div>
+      </div>
+
+      <!-- ── HACK 1: QSuites via Finnair (FEATURED) ── -->
+      <div class="hv-hack-card featured" data-cat="biz points">
+        <div class="hv-hack-header">
+          <div class="hv-hack-icon" style="background:rgba(96,165,250,0.1);">🛋️</div>
+          <div style="flex:1;">
+            <div class="hv-hack-title">Fly Qatar QSuites (World's Best Biz Class) for 85K Points — The Finnair Route</div>
+            <div class="hv-hack-meta">
+              <span class="hv-hack-source">TheGreatIndianMiles</span>
+              <span class="hv-hack-cat hv-cat-biz">BUSINESS CLASS</span>
+              <span class="hv-hack-cat hv-cat-points">POINTS TRANSFER</span>
+              <span class="hv-hack-savings">Save ₹4–10 Lakh</span>
+            </div>
+          </div>
+        </div>
+        <div class="hv-hack-desc">Qatar QSuites (fully enclosed suite, flat bed, Diptyque kits) retails for ₹5–10 lakh. HDFC Infinia transfers to Qatar at 2:1 — terrible. But transfer to Finnair at 1:1 first, then Finnair Avios = Qatar Avios (both oneworld). You get the same QSuites seat for 85K points instead of 1,70,000. HDFC quietly offers this 1:1 Finnair route but doesn't advertise it.</div>
+
+        <!-- Value Comparison Table -->
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;color:#4b5563;margin-bottom:8px;">VALUE COMPARISON — 85,000 POINTS</div>
+          <table class="hv-val-table">
+            <tr><th>METHOD</th><th>WHAT YOU GET</th><th>VALUE/POINT</th></tr>
+            <tr><td>SmartBuy (default)</td><td>Economy to Europe (return)</td><td>₹1.00</td></tr>
+            <tr><td>Direct to Qatar (2:1)</td><td>Needs 1,70,000 RP for QSuites</td><td>₹3.00</td></tr>
+            <tr><td style="color:#e8eaf0;font-weight:600;">Infinia → Finnair → Qatar ✦</td><td style="color:#e8eaf0;font-weight:600;">QSuites seat worth ₹5–10L</td><td class="hv-val-win">₹5.88–₹11.76</td></tr>
+          </table>
+        </div>
+
+        <button class="hv-steps-toggle" onclick="toggleSteps(this)">▶ Show step-by-step guide (7 steps)</button>
+        <div class="hv-steps">
+          <div class="hv-step-row"><div class="hv-step-num">1</div><div class="hv-step-text"><strong>Check QSuites availability</strong> — qatarairways.com → Book → "Use Avios" → Business Class. Look for dates marked <strong>"Available"</strong> (saver rates). Opens 361 days before departure. Best routes: DOH-LHR, DOH-JFK, DOH-MIA, DOH-SIN, DOH-BKK. India routes sometimes have QSuites on A350-1000 — verify on SeatGuru.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">2</div><div class="hv-step-text"><strong>Don't transfer directly to Qatar</strong> — HDFC Infinia to Qatar is 2:1. You'll halve your points. Stop here and read step 3.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">3</div><div class="hv-step-text"><strong>Transfer Infinia → Finnair Plus at 1:1</strong> — SmartBuy → Airline Partners → Finnair Plus. Finnair, British Airways and Qatar all use "Avios" within the oneworld alliance. They're the same currency. Transfer time: 2–5 business days.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">4</div><div class="hv-step-text"><strong>Create a Qatar Privilege Club account</strong> (free) on qatar.com. Make sure your Avios land in your Qatar account — they transfer automatically from Finnair once in the same program.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">5</div><div class="hv-step-text"><strong>Book one-way, not return</strong> — QSuites one-way is 85K Avios (USA→Doha + Doha→India covered on one booking = two QSuites legs). Book the return separately in economy or cash.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">6</div><div class="hv-step-text"><strong>Pay taxes in cash</strong> — expect ₹20,000–30,000 in taxes. Cannot be avoided. Still a fraction of the ₹5–10L cash price.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">7</div><div class="hv-step-text"><strong>⚠ Current caution</strong> — Strait of Hormuz crisis = elevated fuel surcharges right now. If not travelling immediately, hold points. Surcharges will come down. Saver availability will re-open. Book fast when it does — don't overthink.</div></div>
+        </div>
+        <div class="hv-cards-needed">
+          <span style="font-size:10px;color:#4b5563;margin-right:4px;align-self:center;">WORKS WITH:</span>
+          <span class="hv-card-badge">HDFC Infinia ✦ Best</span>
+          <span class="hv-card-badge">HSBC Premier (1:1 direct)</span>
+          <span class="hv-card-badge">Axis Magnus Burgundy</span>
+          <span class="hv-card-badge">HDFC Regalia Gold</span>
+        </div>
+      </div>
+
+      <!-- ── HACK 2: Regalia Gold Finnair Route ── -->
+      <div class="hv-hack-card" data-cat="biz points">
+        <div class="hv-hack-header">
+          <div class="hv-hack-icon" style="background:rgba(255,209,102,0.1);">💡</div>
+          <div style="flex:1;">
+            <div class="hv-hack-title">HDFC Regalia Gold → QSuites: Still 2x Better Than Going Direct</div>
+            <div class="hv-hack-meta">
+              <span class="hv-hack-source">TheGreatIndianMiles</span>
+              <span class="hv-hack-cat hv-cat-biz">BUSINESS CLASS</span>
+              <span class="hv-hack-savings">Save 85K points</span>
+            </div>
+          </div>
+        </div>
+        <div class="hv-hack-desc">Don't have Infinia? Regalia Gold's Finnair route is 2:1 (not 1:1), but still beats going direct to Qatar at 3:1. You need 1,70,000 RP instead of 2,55,000. Saves 85,000 points — that's ₹25.5L of card spend avoided. Card fee: ₹2,500/year. No invite needed.</div>
+        <button class="hv-steps-toggle" onclick="toggleSteps(this)">▶ Show route</button>
+        <div class="hv-steps">
+          <div class="hv-step-row"><div class="hv-step-num">1</div><div class="hv-step-text">Earn Regalia Gold Reward Points (4 RP per ₹150 spend)</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">2</div><div class="hv-step-text"><strong>Transfer to Finnair Plus at 2:1</strong> via SmartBuy → Airline Partners. Needs 1,70,000 RP → 85,000 Finnair Avios.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">3</div><div class="hv-step-text">Book QSuites on qatar.com using 85K Avios. Same booking process as the Infinia route.</div></div>
+        </div>
+        <div class="hv-cards-needed">
+          <span style="font-size:10px;color:#4b5563;margin-right:4px;align-self:center;">WORKS WITH:</span>
+          <span class="hv-card-badge">HDFC Regalia Gold</span>
+        </div>
+      </div>
+
+      <!-- ── HACK 3: Axis Atlas Cap Warning ── -->
+      <div class="hv-hack-card" data-cat="points biz">
+        <div class="hv-hack-header">
+          <div class="hv-hack-icon" style="background:rgba(248,113,113,0.1);">⚠️</div>
+          <div style="flex:1;">
+            <div class="hv-hack-title">Axis Atlas for QSuites? Don't. The 30K Annual Cap Kills It.</div>
+            <div class="hv-hack-meta">
+              <span class="hv-hack-source">TheGreatIndianMiles</span>
+              <span class="hv-hack-cat hv-cat-points">POINTS TRANSFER</span>
+              <span class="hv-hack-savings">Avoid costly mistake</span>
+            </div>
+          </div>
+        </div>
+        <div class="hv-hack-desc">Axis Atlas transfers to Qatar at 1:2 (excellent ratio) — but it has a 30,000 Edge Miles annual cap on Group A partners (which includes Qatar). You'd need 42,500 Edge Miles for 85K Avios. Exceeds the cap. Cannot do QSuites in a single year on Atlas. Use Magnus Burgundy instead (2L annual cap on Group A — far more room).</div>
+        <div class="hv-cards-needed">
+          <span style="font-size:10px;color:#f87171;margin-right:4px;align-self:center;">❌ AVOID:</span>
+          <span class="hv-card-badge" style="border-color:rgba(248,113,113,0.2);color:#f87171;">Axis Atlas (cap issue)</span>
+          <span style="font-size:10px;color:#4b5563;margin-left:8px;margin-right:4px;align-self:center;">✅ USE INSTEAD:</span>
+          <span class="hv-card-badge">Axis Magnus Burgundy</span>
+        </div>
+      </div>
+
+      <!-- ── HACK 4: Doha Stopover ── -->
+      <div class="hv-hack-card" data-cat="booking biz">
+        <div class="hv-hack-header">
+          <div class="hv-hack-icon" style="background:rgba(167,139,250,0.1);">🕌</div>
+          <div style="flex:1;">
+            <div class="hv-hack-title">Free Doha Stopover on Qatar Award Tickets — 2 Days, No Extra Avios</div>
+            <div class="hv-hack-meta">
+              <span class="hv-hack-source">TheGreatIndianMiles</span>
+              <span class="hv-hack-cat hv-cat-booking">BOOKING TRICK</span>
+              <span class="hv-hack-savings">Free ₹15K+ value</span>
+            </div>
+          </div>
+        </div>
+        <div class="hv-hack-desc">Qatar allows a free Doha stopover on award tickets at no extra Avios cost. Fly QSuites to Doha, spend 2 days at no additional points cost, then continue to your destination. Qatar often offers discounted hotel deals for stopover travellers. Best combined with the Lusail + Souq Waqif route — 48 hours is enough.</div>
+        <button class="hv-steps-toggle" onclick="toggleSteps(this)">▶ How to add a stopover</button>
+        <div class="hv-steps">
+          <div class="hv-step-row"><div class="hv-step-num">1</div><div class="hv-step-text">When booking on qatar.com with Avios, search for a multi-city itinerary: Origin → DOH → Destination.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">2</div><div class="hv-step-text">Add a layover of 24–48 hours in Doha. Qatar allows this on award tickets at no Avios surcharge.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">3</div><div class="hv-step-text">Book a hotel via Qatar's stopover programme for discounted rates. Budget: ₹8,000–15,000/night for 4-star in Doha.</div></div>
+        </div>
+      </div>
+
+      <!-- ── HACK 5: HSBC TravelOne Direct ── -->
+      <div class="hv-hack-card" data-cat="points biz">
+        <div class="hv-hack-header">
+          <div class="hv-hack-icon" style="background:rgba(74,222,128,0.1);">⚡</div>
+          <div style="flex:1;">
+            <div class="hv-hack-title">HSBC TravelOne: The Cleanest 1:1 Route to Qatar — No Hacks Needed</div>
+            <div class="hv-hack-meta">
+              <span class="hv-hack-source">TheGreatIndianMiles</span>
+              <span class="hv-hack-cat hv-cat-points">POINTS TRANSFER</span>
+              <span class="hv-hack-savings">85K → 85K Avios</span>
+            </div>
+          </div>
+        </div>
+        <div class="hv-hack-desc">HSBC Premier and TravelOne transfer directly to Qatar Avios at 1:1 — no intermediate program needed. 85,000 HSBC points = 85,000 Qatar Avios. Transfer is instant to 48 hours. If you're new to the points game and want zero complexity, this is the single best route to QSuites. No Finnair, no Alliance tricks.</div>
+        <div class="hv-cards-needed">
+          <span style="font-size:10px;color:#4b5563;margin-right:4px;align-self:center;">WORKS WITH:</span>
+          <span class="hv-card-badge">HSBC TravelOne ✦ Best for simplicity</span>
+          <span class="hv-card-badge">HSBC Premier</span>
+        </div>
+      </div>
+
+      <!-- ── HACK 6: Saver Availability Timing ── -->
+      <div class="hv-hack-card" data-cat="booking biz">
+        <div class="hv-hack-header">
+          <div class="hv-hack-icon" style="background:rgba(251,191,36,0.1);">📅</div>
+          <div style="flex:1;">
+            <div class="hv-hack-title">Book 361 Days Out for QSuites Saver — And Use One-Way Awards</div>
+            <div class="hv-hack-meta">
+              <span class="hv-hack-source">TheGreatIndianMiles</span>
+              <span class="hv-hack-cat hv-cat-booking">BOOKING TRICK</span>
+              <span class="hv-hack-savings">Saver = 85K vs 170K</span>
+            </div>
+          </div>
+        </div>
+        <div class="hv-hack-desc">QSuites saver award space opens 361 days before departure — book the day it opens for best availability. Saver = 85K Avios. Flexi = 1,70,000 (2x the points). Midweek dates (Tue/Wed/Thu) have significantly better saver availability than weekends. Use one-way searches — more flexibility than round-trip. Set ExpertFlyer alerts for your route to catch space when it opens.</div>
+        <button class="hv-steps-toggle" onclick="toggleSteps(this)">▶ Availability monitoring tips</button>
+        <div class="hv-steps">
+          <div class="hv-step-row"><div class="hv-step-num">1</div><div class="hv-step-text">Set a calendar reminder for exactly 361 days before your target travel date. Log in to qatar.com that morning and search with Avios.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">2</div><div class="hv-step-text">Use <strong>ExpertFlyer</strong> ($9.99/month) to set saver alerts on your route. You'll get notified the moment space opens — often months before the 361-day window when cancellations occur.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">3</div><div class="hv-step-text"><strong>Book first, decide later</strong> — cancellation fees on Avios awards are low. If you find dates that might work, book them. Don't let the perfect be the enemy of the available.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">4</div><div class="hv-step-text">Always verify QSuites on your specific flight via SeatGuru.com — not all Qatar Business Class routes have QSuites. Look for A350-1000 or 777-300ER QSuites configuration.</div></div>
+        </div>
+      </div>
+
+      <!-- ── HACK 7: Amex Transfer Bonus ── -->
+      <div class="hv-hack-card" data-cat="points">
+        <div class="hv-hack-header">
+          <div class="hv-hack-icon" style="background:rgba(255,209,102,0.1);">🎁</div>
+          <div style="flex:1;">
+            <div class="hv-hack-title">Wait for Amex → Qatar Transfer Bonus (10–30% Extra Free Miles)</div>
+            <div class="hv-hack-meta">
+              <span class="hv-hack-source">TheGreatIndianMiles</span>
+              <span class="hv-hack-cat hv-cat-points">POINTS TRANSFER</span>
+              <span class="hv-hack-savings">+10–30% free miles</span>
+            </div>
+          </div>
+        </div>
+        <div class="hv-hack-desc">Amex India occasionally runs transfer bonuses to Qatar (10–30% extra Avios). If you're on the Amex route with a large MR balance, don't transfer until a bonus is live. Amex → Qatar is normally 2:1, but with a 30% bonus: 1,70,000 MR → 1,10,500 Avios (vs 85,000 normally). Watch Amex India's email announcements and TGIM's Instagram for bonus alerts.</div>
+        <div class="hv-cards-needed">
+          <span style="font-size:10px;color:#4b5563;margin-right:4px;align-self:center;">WORKS WITH:</span>
+          <span class="hv-card-badge">Amex Platinum Charge</span>
+          <span class="hv-card-badge">Amex Platinum Reserve</span>
+        </div>
+      </div>
+
+      <!-- ── HACK 8: Accor → Iberia ── -->
+      <div class="hv-hack-card" data-cat="points hotel">
+        <div class="hv-hack-header">
+          <div class="hv-hack-icon" style="background:rgba(167,139,250,0.1);">♻️</div>
+          <div style="flex:1;">
+            <div class="hv-hack-title">Unlock Stranded Accor Points for QSuites via Iberia Avios</div>
+            <div class="hv-hack-meta">
+              <span class="hv-hack-source">TheGreatIndianMiles</span>
+              <span class="hv-hack-cat hv-cat-hotel">HOTEL POINTS</span>
+              <span class="hv-hack-cat hv-cat-biz">BUSINESS CLASS</span>
+              <span class="hv-hack-savings">Rescue idle points</span>
+            </div>
+          </div>
+        </div>
+        <div class="hv-hack-desc">Have Accor ALL points sitting unused? Don't let them rot. Transfer Accor → Iberia Avios at 1:1 (takes ~5 days), then use Iberia Avios to book Qatar QSuites on qatar.com. Iberia Avios = Qatar Avios (same oneworld currency). Only use this if you already have Accor points — don't engineer this route from scratch.</div>
+        <button class="hv-steps-toggle" onclick="toggleSteps(this)">▶ Accor → Qatar route</button>
+        <div class="hv-steps">
+          <div class="hv-step-row"><div class="hv-step-num">1</div><div class="hv-step-text">Log in to your Accor ALL account → Partners → Iberia Plus. Transfer your points at 1:1 ratio.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">2</div><div class="hv-step-text">Wait 3–5 days for Iberia Avios to appear in your Iberia Plus account.</div></div>
+          <div class="hv-step-row"><div class="hv-step-num">3</div><div class="hv-step-text">On qatar.com, log in to Qatar Privilege Club and book using Iberia Avios directly (shared Avios currency). 85K Iberia Avios = 85K Qatar Avios.</div></div>
+        </div>
+        <div class="hv-cards-needed">
+          <span style="font-size:10px;color:#4b5563;margin-right:4px;align-self:center;">HOW TO EARN ACCOR:</span>
+          <span class="hv-card-badge">HSBC TravelOne → Accor</span>
+          <span class="hv-card-badge">Axis Atlas → Accor</span>
+          <span class="hv-card-badge">Direct Accor stays</span>
+        </div>
+      </div>
+
+      <!-- Quick Reference Card -->
+      <div class="section-title" style="margin-top:28px;">📊 QUICK REFERENCE — ALL ROUTES TO QSUITES</div>
+      <div class="card" style="padding:16px;">
+        <table class="hv-val-table">
+          <tr><th>CARD</th><th>ROUTE</th><th>POINTS NEEDED</th><th>ANNUAL CAP</th></tr>
+          <tr><td style="color:#e8eaf0;font-weight:600;">HDFC Infinia</td><td>→ Finnair 1:1 → Qatar</td><td class="hv-val-win">85K RP ✦ Best</td><td style="color:#4ade80;">Sufficient</td></tr>
+          <tr><td style="color:#e8eaf0;font-weight:600;">HSBC TravelOne</td><td>→ Qatar direct 1:1</td><td class="hv-val-win">85K points ✦ Simplest</td><td style="color:#4ade80;">Sufficient</td></tr>
+          <tr><td style="color:#e8eaf0;">Axis Magnus Burgundy</td><td>→ Qatar direct 5:4</td><td>1,06,250 ER</td><td style="color:#4ade80;">2L cap ✓</td></tr>
+          <tr><td style="color:#e8eaf0;">HDFC Regalia Gold</td><td>→ Finnair 2:1 → Qatar</td><td>1,70,000 RP</td><td style="color:#4ade80;">Sufficient</td></tr>
+          <tr><td style="color:#e8eaf0;">Amex Platinum</td><td>→ Qatar direct 2:1</td><td>1,70,000 MR</td><td style="color:#4ade80;">Sufficient</td></tr>
+          <tr><td style="color:#e8eaf0;">Accor ALL (idle)</td><td>→ Iberia → Qatar</td><td>85K Accor pts</td><td style="color:#4ade80;">Sufficient</td></tr>
+          <tr><td style="color:#f87171;text-decoration:line-through;">Axis Atlas</td><td>→ Qatar 1:2 (capped)</td><td style="color:#f87171;">❌ Cap at 30K/yr</td><td style="color:#f87171;">Insufficient</td></tr>
+        </table>
+      </div>
+
+      <!-- More coming -->
+      <div style="text-align:center;margin-top:24px;padding:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;">
+        <div style="font-size:13px;color:#6b7280;margin-bottom:6px;">APEX scouts new hacks weekly from 12 expert sources.</div>
+        <div style="font-size:11px;color:#374151;">Hotel status matches · Airline sweet spots · Transfer arbitrage · Booking window strategies — all coming soon.</div>
+        <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;">
+          <div class="btn btn-ghost" style="font-size:12px;">🔔 Notify me on new hacks</div>
+          <div class="btn btn-ghost" style="font-size:12px;" onclick="show('deals')">View live deals →</div>
+        </div>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -2130,6 +2476,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const p0 = document.getElementById('peek-0');
   if(p0) p0.style.display = 'none';
 });
+
+// Hacks Vault filter
+function hvFilter(el, cat) {
+  document.querySelectorAll('.hv-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.hv-hack-card').forEach(card => {
+    if (cat === 'all') { card.style.display = 'block'; return; }
+    card.style.display = (card.dataset.cat || '').includes(cat) ? 'block' : 'none';
+  });
+}
+
+// Toggle steps inside hack card
+function toggleSteps(btn) {
+  const steps = btn.nextElementSibling;
+  const open = steps.classList.toggle('open');
+  btn.textContent = btn.textContent.replace(open ? '▶' : '▼', open ? '▼' : '▶');
+}
 
 // Deals filter
 function dealsFilter(btn, type) {
